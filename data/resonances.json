@@ -1,0 +1,100 @@
+{
+  "_doc": "PRISMA GDD §5 — Ressonância por contagem de Peso Elemental. Vertical Slice: apenas Eco (2) e Coro (4).",
+  "thresholds": {
+    "eco": 2,
+    "coro": 4,
+    "apice": 6
+  },
+  "resonances": [
+    {
+      "element": "GELO",
+      "tier": "eco",
+      "name": "Eco de Gelo",
+      "text": "Gélido também reduz 10% de velocidade de movimento.",
+      "mods": {
+        "gelido_move_slow": 0.1
+      }
+    },
+    {
+      "element": "GELO",
+      "tier": "coro",
+      "name": "Coro de Gelo",
+      "text": "Inimigos com Gélido recebem +15% de dano.",
+      "mods": {
+        "dmg_vs_gelido": 0.15
+      }
+    },
+    {
+      "element": "AGUA",
+      "tier": "eco",
+      "name": "Eco de Água",
+      "text": "Encharcado dura +50%.",
+      "mods": {
+        "encharcado_decay_mult": 0.667
+      }
+    },
+    {
+      "element": "AGUA",
+      "tier": "coro",
+      "name": "Coro de Água",
+      "text": "Todos os aliados aplicam +1 UA.",
+      "mods": {
+        "team_ua_add": 1.0
+      }
+    },
+    {
+      "element": "FOGO",
+      "tier": "eco",
+      "name": "Eco de Fogo",
+      "text": "+20% de dano de reação.",
+      "mods": {
+        "reaction_dmg_add": 0.2
+      }
+    },
+    {
+      "element": "FOGO",
+      "tier": "coro",
+      "name": "Coro de Fogo",
+      "text": "Combustão de aliados empilha até 2× (teto 16 UA).",
+      "mods": {
+        "combustao_cap_mult": 2.0
+      }
+    },
+    {
+      "element": "RAIO",
+      "tier": "eco",
+      "name": "Eco de Raio",
+      "text": "+10% de chance de crítico.",
+      "mods": {
+        "crit_add": 0.1
+      }
+    },
+    {
+      "element": "RAIO",
+      "tier": "coro",
+      "name": "Coro de Raio",
+      "text": "Carga acumula 25% mais rápido.",
+      "mods": {
+        "carga_ua_mult": 1.25
+      }
+    },
+    {
+      "element": "NATUREZA",
+      "tier": "eco",
+      "name": "Eco de Natureza",
+      "text": "Esporo dobra a cada 2 s (em vez de 3 s).",
+      "mods": {
+        "esporo_double_time": 2.0
+      }
+    },
+    {
+      "element": "NATUREZA",
+      "tier": "coro",
+      "name": "Coro de Natureza",
+      "text": "Inimigos com Esporo recebem +15% de dano.",
+      "mods": {
+        "dmg_vs_esporo": 0.15
+      }
+    }
+  ]
+}

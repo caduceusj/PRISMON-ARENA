@@ -1,0 +1,56 @@
+{
+  "_doc": "PROPOSTA de paleta. Todo arquivo .json desta pasta e lido e juntado a data/paleta.json — para instalar uma paleta nova, largue um arquivo aqui; para ativa-la, escreva o nome dela em `ativa` la. Um nome repetido aqui SOBREPOE o de la, que e como se muda a paleta do jogo sem editar o arquivo do jogo.",
+  "paletas": {
+    "abisso": {
+      "nome": "O Abisso",
+      "nota": "PROPOSTA. Agua funda: a materia e azul-petroleo puxando para teal, a aresta e azul-gelo e o acento e bioluminescencia -- uma cor que so existe porque o resto e escuro. Contraste: forte 14,17:1, fraco 6,35:1; degraus 1,150 / 1,181 / 1,623, o passo mais largo das cinco paletas nos dois primeiros degraus (o vidro tem 1,128 / 1,102). Os cinco elementos seguem separados do fundo: o pior e AGUA a dE2000 37,1 e 4,23:1, contra 40,1 e 4,30:1 no vidro. As 16 salas guardam um piso de 13,2 de dE2000 entre si -- no vidro, preparacao, sinergias e combate sao o MESMO hex. sala_forca 0,18 (o vidro usa 0,06, que nao aparece).",
+      "materia": {
+        "mesa": "#041012",
+        "lajota": "#0b2028",
+        "lajota_hi": "#132e39",
+        "aresta": "#265060"
+      },
+      "materia_aux": {
+        "recuo": "#01080a",
+        "aresta_hi": "#34736d"
+      },
+      "recipiente": {
+        "fundo": "#041012",
+        "painel": "#08191f",
+        "painel_hi": "#0e2730",
+        "linha": "#1d4655"
+      },
+      "texto": {
+        "forte": "#ddeff4",
+        "fraco": "#7aa6b4"
+      },
+      "estado": {
+        "bom": "#63dd74",
+        "ruim": "#f0566e",
+        "aviso": "#f0a83a",
+        "ouro": "#f2d98e",
+        "acento": "#23e8c4"
+      },
+      "salas": {
+        "titulo": "#10909e",
+        "iniciais": "#46a063",
+        "escolha": "#4068d6",
+        "preparacao": "#7688a8",
+        "sinergias": "#8a5ae0",
+        "combate": "#2e4a66",
+        "vitoria": "#2fc49e",
+        "derrota": "#7a3560",
+        "recruta": "#2a8fd1",
+        "loja": "#e08a2a",
+        "cozinha": "#e8663a",
+        "poder": "#38dcee",
+        "acaso": "#cc4fc0",
+        "troca": "#8d9a60",
+        "chefe": "#c0405e",
+        "fim_vitoria": "#f0d878"
+      },
+      "sala_forca": 0.18,
+      "sala_na_materia": 0.32
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "_doc": "Gerado por tools/build_monster_rig.py — MEDIDO das peças, não estimado. Não editar à mão: rodar o script.",
+  "_frac": "Todas as medidas são frações do tamanho da própria imagem.",
+  "bodies": {
+    "A": {
+      "w": 165,
+      "h": 165,
+      "aspect": 1.0,
+      "head_half_w": 0.4939,
+      "shoulder_half_w": 0.5,
+      "hip_half_w": 0.4879,
+      "head_cx": 0.497,
+      "shoulder_cx": 0.497,
+      "hip_cx": 0.497
+    },
+    "B": {
+      "w": 192,
+      "h": 192,
+      "aspect": 1.0,
+      "head_half_w": 0.3724,
+      "shoulder_half_w": 0.4948,
+      "hip_half_w": 0.349,
+      "head_cx": 0.4948,
+      "shoulder_cx": 0.4974,
+      "hip_cx": 0.4974
+    },
+    "C": {
+      "w": 141,
+      "h": 194,
+      "aspect": 0.7268,
+      "head_half_w": 0.4149,
+      "shoulder_half_w": 0.5,
+      "hip_half_w": 0.3298,
+      "head_cx": 0.4965,
+      "shoulder_cx": 0.4965,
+      "hip_cx": 0.4965
+    },
+    "D": {
+      "w": 174,
+      "h": 182,
+      "aspect": 0.956,
+      "head_half_w": 0.3333,
+      "shoulder_half_w": 0.4713,
+      "hip_half_w": 0.408,
+      "head_cx": 0.4971,
+      "shoulder_cx": 0.4971,
+      "hip_cx": 0.4971
+    },
+    "E": {
+      "w": 132,
+      "h": 250,
+      "aspect": 0.528,
+      "head_half_w": 0.447,
+      "shoulder_half_w": 0.4697,
+      "hip_half_w": 0.4545,
+      "head_cx": 0.4962,
+      "shoulder_cx": 0.4962,
+      "hip_cx": 0.4962
+    },
+    "F": {
+      "w": 170,
+      "h": 236,
+      "aspect": 0.7203,
+      "head_half_w": 0.3382,
+      "shoulder_half_w": 0.45,
+      "hip_half_w": 0.3853,
+      "head_cx": 0.4941,
+      "shoulder_cx": 0.5412,
+      "hip_cx": 0.5235
+    }
+  },
+  "arms": {
+    "A": {
+      "w": 82,
+      "h": 176,
+      "anchor": [
+        0.2963,
+        0.0694
+      ]
+    },
+    "B": {
+      "w": 51,
+      "h": 161,
+      "anchor": [
+        0.3415,
+        0.0673
+      ]
+    },
+    "C": {
+      "w": 98,
+      "h": 181,
+      "anchor": [
+        0.2913,
+        0.0707
+      ]
+    },
+    "D": {
+      "w": 92,
+      "h": 197,
+      "anchor": [
+        0.3294,
+        0.0713
+      ]
+    },
+    "E": {
+      "w": 71,
+      "h": 149,
+      "anchor": [
+        0.3962,
+        0.0701
+      ]
+    }
+  },
+  "legs": {
+    "A": {
+      "w": 72,
+      "h": 167,
+      "anchor": [
+        0.3513,
+        0.0855
+      ]
+    },
+    "B": {
+      "w": 55,
+      "h": 149,
+      "anchor": [
+        0.2828,
+        0.0811
+      ]
+    },
+    "C": {
+      "w": 79,
+      "h": 124,
+      "anchor": [
+        0.2634,
+        0.0844
+      ]
+    },
+    "D": {
+      "w": 71,
+      "h": 122,
+      "anchor": [
+        0.294,
+        0.0853
+      ]
+    },
+    "E": {
+      "w": 102,
+      "h": 109,
+      "anchor": [
+        0.2402,
+        0.0857
+      ]
+    }
+  },
+  "details": {
+    "horn_large": {
+      "w": 40,
+      "h": 42,
+      "anchor": [
+        0.4622,
+        0.8686
+      ]
+    },
+    "horn_small": {
+      "w": 31,
+      "h": 27,
+      "anchor": [
+        0.4094,
+        0.8567
+      ]
+    },
+    "antenna_large": {
+      "w": 38,
+      "h": 58,
+      "anchor": [
+        0.1974,
+        0.8918
+      ]
+    },
+    "antenna_small": {
+      "w": 26,
+      "h": 42,
+      "anchor": [
+        0.1538,
+        0.881
+      ]
+    },
+    "ear": {
+      "w": 38,
+      "h": 44,
+      "anchor": [
+        0.476,
+        0.8636
+      ]
+    },
+    "ear_round": {
+      "w": 54,
+      "h": 54,
+      "anchor": [
+        0.4907,
+        0.8741
+      ]
+    }
+  }
+}

@@ -23,3 +23,18 @@ mono_crash.*.json
 *.exe
 # Uncomment if your project does not version PCK files as runtime dependencies.
 # *.pck
+
+# --- PRISMON ------------------------------------------------------------
+
+# Android: so passa a existir se o projeto ganhar um build de gradle
+/android/
+
+# capturas geradas por tools/screenshots.tscn, tools/bestiary.tscn e pelas
+# sondas (tools/*_probe.tscn). shots_<paleta>/ e onde saem as capturas de
+# uma paleta de teste.
+shots/
+shots_*/
+
+# cache de bytecode do Python (tools/*.py)
+__pycache__/
+*.pyc

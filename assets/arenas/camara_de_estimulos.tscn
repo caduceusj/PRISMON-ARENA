@@ -1,0 +1,168 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/cenario_fade.gdshader" id="sh"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/01_parede.png" id="t1"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/02_chao.png" id="t2"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_1.png" id="t3"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_2.png" id="t4"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_3.png" id="t5"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_4.png" id="t6"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_5.png" id="t7"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_6.png" id="t8"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_7.png" id="t9"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/03_coluna_8.png" id="t10"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/04_cano_1.png" id="t11"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/04_cano_2.png" id="t12"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_1.png" id="t13"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_2.png" id="t14"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_3.png" id="t15"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_4.png" id="t16"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_5.png" id="t17"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_6.png" id="t18"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_7.png" id="t19"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_8.png" id="t20"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_9.png" id="t21"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/camara_de_estimulos/05_frasco_10.png" id="t22"]
+
+[sub_resource type="ShaderMaterial" id="mat"]
+shader = ExtResource("sh")
+shader_parameter/origem = Vector2(0, 0)
+shader_parameter/tamanho = Vector2(1280, 260)
+shader_parameter/topo_fim = 0.3692
+shader_parameter/horizonte = 0.6538
+shader_parameter/rodape_fim = 0.9077
+shader_parameter/lateral = 0.1641
+
+[node name="Cenario" type="Node2D"]
+
+[node name="01 parede" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 85)
+texture = ExtResource("t1")
+
+[node name="02 chao" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 203)
+texture = ExtResource("t2")
+
+[node name="03 coluna 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(62, 100)
+texture = ExtResource("t3")
+
+[node name="03 coluna 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(220, 100)
+texture = ExtResource("t4")
+
+[node name="03 coluna 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(378, 100)
+texture = ExtResource("t5")
+
+[node name="03 coluna 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(536, 100)
+texture = ExtResource("t6")
+
+[node name="03 coluna 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(694, 100)
+texture = ExtResource("t7")
+
+[node name="03 coluna 6" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(852, 100)
+texture = ExtResource("t8")
+
+[node name="03 coluna 7" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1010, 100)
+texture = ExtResource("t9")
+
+[node name="03 coluna 8" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1168, 100)
+texture = ExtResource("t10")
+
+[node name="04 cano 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 74)
+texture = ExtResource("t11")
+
+[node name="04 cano 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 112)
+texture = ExtResource("t12")
+
+[node name="05 frasco 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(52, 179)
+texture = ExtResource("t13")
+
+[node name="05 frasco 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(184, 179)
+texture = ExtResource("t14")
+
+[node name="05 frasco 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(316, 179)
+texture = ExtResource("t15")
+
+[node name="05 frasco 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(448, 179)
+texture = ExtResource("t16")
+
+[node name="05 frasco 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(580, 179)
+texture = ExtResource("t17")
+
+[node name="05 frasco 6" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(712, 179)
+texture = ExtResource("t18")
+
+[node name="05 frasco 7" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(844, 179)
+texture = ExtResource("t19")
+
+[node name="05 frasco 8" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(976, 179)
+texture = ExtResource("t20")
+
+[node name="05 frasco 9" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1108, 179)
+texture = ExtResource("t21")
+
+[node name="05 frasco 10" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1240, 179)
+texture = ExtResource("t22")

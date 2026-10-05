@@ -1,0 +1,56 @@
+{
+  "_doc": "PROPOSTA de paleta. Todo arquivo .json desta pasta e lido e juntado a data/paleta.json — para instalar uma paleta nova, largue um arquivo aqui; para ativa-la, escreva o nome dela em `ativa` la. Um nome repetido aqui SOBREPOE o de la, que e como se muda a paleta do jogo sem editar o arquivo do jogo.",
+  "paletas": {
+    "estufa": {
+      "nome": "A Estufa",
+      "nota": "PROPOSTA. Vidro de estufa botanica: verde-garrafa na mesa, limo na quina, orquidea magenta no acento — acento verde sobre fundo verde faria o estado sumir. A rampa GIRA O MATIZ (173 na mesa, 100 na aresta), coisa que a `vidro` nao faz. A lajota e mais clara que a da `vidro` por medida, nao por gosto: em L* 13 o verde lia preto na captura, e so em L* 18,2 ele empata o croma da lajota roxa (C*ab 17,7 contra 17,0). Medido: texto forte 12,68:1, fraco 6,10:1 (a `vidro` faz 13,86 e 5,08); degraus 1,267 / 1,221 / 1,401 contra 1,128 / 1,102 / 1,317 — todos os passos mais largos. As 16 salas em 16 matizes, par mais parecido a dE2000 13,1; na `vidro` tres salas (preparacao, sinergias, combate) sao o MESMO hex. Os tres precos, medidos: acento x ruim 23,5 (34,1 na `vidro`), Natureza x aresta 34,5 (57,3) e Fogo sobre a lajota 3,84:1 (4,73:1) — embora em dE2000 o Fogo GANHE, 56,1 contra 49,5.",
+      "materia": {
+        "mesa": "#041d1a",
+        "lajota": "#073329",
+        "lajota_hi": "#124231",
+        "aresta": "#335920"
+      },
+      "materia_aux": {
+        "recuo": "#011210",
+        "aresta_hi": "#477826"
+      },
+      "recipiente": {
+        "fundo": "#041d1a",
+        "painel": "#062922",
+        "painel_hi": "#0d392b",
+        "linha": "#1b4f2e"
+      },
+      "texto": {
+        "forte": "#e7f9f0",
+        "fraco": "#81b898"
+      },
+      "estado": {
+        "bom": "#befa46",
+        "ruim": "#ed5a73",
+        "aviso": "#e0872d",
+        "ouro": "#fad391",
+        "acento": "#ed68e9"
+      },
+      "salas": {
+        "titulo": "#3ba384",
+        "iniciais": "#6c9e3f",
+        "escolha": "#4286ad",
+        "preparacao": "#996c45",
+        "sinergias": "#c25dae",
+        "combate": "#505794",
+        "vitoria": "#a5d13f",
+        "derrota": "#753454",
+        "recruta": "#44b1c7",
+        "loja": "#e6b737",
+        "cozinha": "#e6693c",
+        "poder": "#2de0ce",
+        "acaso": "#9a60db",
+        "troca": "#67856e",
+        "chefe": "#ad463e",
+        "fim_vitoria": "#faec91"
+      },
+      "sala_forca": 0.2,
+      "sala_na_materia": 0.32
+    }
+  }
+}

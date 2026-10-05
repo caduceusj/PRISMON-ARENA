@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/cenario_fade.gdshader" id="sh"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/01_ceu.png" id="t1"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/05_montanha_meio.png" id="t2"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/06_montanha_perto.png" id="t3"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/08_pedras.png" id="t4"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_1.png" id="t5"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_2.png" id="t6"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_3.png" id="t7"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_4.png" id="t8"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_5.png" id="t9"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/10_poste_6.png" id="t10"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/11_arco_1.png" id="t11"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/11_arco_2.png" id="t12"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/11_arco_3.png" id="t13"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/11_arco_4.png" id="t14"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/campo_magnetico/11_arco_5.png" id="t15"]
+
+[sub_resource type="ShaderMaterial" id="mat"]
+shader = ExtResource("sh")
+shader_parameter/origem = Vector2(0, 0)
+shader_parameter/tamanho = Vector2(1280, 260)
+shader_parameter/topo_fim = 0.3692
+shader_parameter/horizonte = 0.6538
+shader_parameter/rodape_fim = 0.9077
+shader_parameter/lateral = 0.1641
+
+[node name="Cenario" type="Node2D"]
+
+[node name="01 ceu" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 130)
+texture = ExtResource("t1")
+
+[node name="05 montanha meio" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 155)
+texture = ExtResource("t2")
+
+[node name="06 montanha perto" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 179)
+texture = ExtResource("t3")
+
+[node name="08 pedras" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 250)
+texture = ExtResource("t4")
+
+[node name="10 poste 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(86, 138)
+texture = ExtResource("t5")
+
+[node name="10 poste 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(306, 129)
+texture = ExtResource("t6")
+
+[node name="10 poste 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(526, 142)
+texture = ExtResource("t7")
+
+[node name="10 poste 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(746, 125)
+texture = ExtResource("t8")
+
+[node name="10 poste 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(966, 136)
+texture = ExtResource("t9")
+
+[node name="10 poste 6" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1186, 131)
+texture = ExtResource("t10")
+
+[node name="11 arco 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(196, 96)
+texture = ExtResource("t11")
+
+[node name="11 arco 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(416, 101)
+texture = ExtResource("t12")
+
+[node name="11 arco 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(636, 96)
+texture = ExtResource("t13")
+
+[node name="11 arco 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(856, 91)
+texture = ExtResource("t14")
+
+[node name="11 arco 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1076, 96)
+texture = ExtResource("t15")

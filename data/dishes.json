@@ -1,0 +1,81 @@
+{
+  "_doc": "PRISMA GDD §12.3 e §12.4 — Nutrição e Transmutação. Pratos são cozinhados com Ingredientes (§12.5) e dão bônus PERMANENTES a UMA unidade.",
+  "_estomago": "Cada unidade tem um Estômago: 3 pratos (base), 4 (evoluída). Uma vez cheio, não aceita mais Nutrição. Escolher em quem investir é a decisão de run.",
+  "_custo": "price = preco em Eter. Revisao 03/09 (autor): a despensa foi REMOVIDA e tudo passou a ser comprado com Eter. Duas moedas faziam o jogador guardar ingrediente para um prato que talvez nao aparecesse; com uma so, comida e item disputam o mesmo bolso e a escolha fica visivel.",
+  "_slice": "O GDD tem um prato por elemento. Como o Vertical Slice usa 4 elementos, a carta tem 4 pratos de Nutrição + 3 de Transmutação.",
+  "dishes": [
+    {
+      "id": "espeto_flamejante",
+      "name": "Espeto Flamejante",
+      "kind": "nutricao",
+      "color": "#e8563a",
+      "text": "+10 ATK, permanente.",
+      "mods": {
+        "atk": 10.0
+      },
+      "price": 8
+    },
+    {
+      "id": "sorvete_de_nevoa",
+      "name": "Sorvete de Névoa",
+      "kind": "nutricao",
+      "color": "#7fd4e8",
+      "text": "+25 Vontade, permanente. Encurta todo Controle sofrido.",
+      "mods": {
+        "vontade": 25.0
+      },
+      "price": 8
+    },
+    {
+      "id": "caldo_eletrico",
+      "name": "Caldo Elétrico",
+      "kind": "nutricao",
+      "color": "#e8c53a",
+      "text": "+0.3 VEL, permanente. Mais golpes por segundo = mais aura aplicada.",
+      "mods": {
+        "vel": 0.3
+      },
+      "price": 8
+    },
+    {
+      "id": "banquete_do_diluvio",
+      "name": "Banquete do Dilúvio",
+      "kind": "nutricao",
+      "color": "#3a7fe0",
+      "text": "+1 slot de item nesta unidade — ignora o limite da forma.",
+      "mods": {
+        "item_slot": 1.0
+      },
+      "price": 12
+    },
+    {
+      "id": "ensopado_de_raizes",
+      "name": "Ensopado de Raízes",
+      "kind": "nutricao",
+      "color": "#5cb85c",
+      "text": "+80 HP, permanente.",
+      "mods": {
+        "hp": 80.0
+      },
+      "price": 8
+    },
+    {
+      "id": "guisado_cromatico",
+      "name": "Guisado Cromático",
+      "kind": "transmutacao",
+      "color": "#c9a8ff",
+      "text": "Muda a Afinidade da unidade para o elemento escolhido. Permanente.",
+      "effect": "set_element",
+      "price": 12
+    },
+    {
+      "id": "doce_do_esquecimento",
+      "name": "Doce do Esquecimento",
+      "kind": "transmutacao",
+      "color": "#8f88a8",
+      "text": "Esvazia o Estômago da unidade e devolve 50% dos ingredientes gastos. A ferramenta de correção de build.",
+      "effect": "clear_stomach",
+      "price": 8
+    }
+  ]
+}

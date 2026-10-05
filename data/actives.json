@@ -1,0 +1,124 @@
+{
+  "_doc": "PRISMA GDD §8.2 — Ativos da Mão do Domador. Revisão 02/09: o Improviso saiu junto com os consumíveis (as criaturas se recuperam sozinhas ao fim da batalha, então não há bolsa para ele gastar). A cura de ÁREA continua — dentro de um combate o dano ainda importa.",
+  "_energy": "Energia: +2/s passiva, +1 por reação da sua equipe, +5 por aliado morto.",
+  "actives": [
+    {
+      "id": "meteoro",
+      "name": "Meteoro",
+      "cost": 40,
+      "category": "ofensivo",
+      "color": "#e8563a",
+      "aim": "enemy_area",
+      "radius": 210.0,
+      "text": "120 de dano de Fogo em área grande + 4 UA de Combustão a todos os atingidos.",
+      "ops": [
+        {
+          "op": "strike",
+          "target": "aim_area",
+          "element": "FOGO",
+          "ua": 4.0,
+          "flat": 120.0,
+          "radius": 210.0
+        }
+      ]
+    },
+    {
+      "id": "chuva_torrencial",
+      "name": "Chuva Torrencial",
+      "cost": 35,
+      "category": "campo",
+      "color": "#3a7fe0",
+      "aim": "all_enemies",
+      "text": "Aplica 5 UA de Encharcado a TODOS os inimigos por 8 s. O maior habilitador de reação do jogo.",
+      "ops": [
+        {
+          "op": "strike",
+          "target": "enemy_all",
+          "element": "AGUA",
+          "ua": 5.0,
+          "flat": 0.0
+        }
+      ]
+    },
+    {
+      "id": "bencao_aurora",
+      "name": "Bênção Aurora",
+      "cost": 45,
+      "category": "suporte",
+      "color": "#e8dcae",
+      "aim": "all_allies",
+      "text": "Cura 25% do HP máx de toda a equipe e remove 1 debuff por unidade.",
+      "ops": [
+        {
+          "op": "heal",
+          "target": "ally_all",
+          "pct_max": 0.25
+        },
+        {
+          "op": "cleanse",
+          "target": "ally_all",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "prisma_reescrita",
+      "name": "Prisma de Reescrita",
+      "cost": 50,
+      "category": "conversao",
+      "color": "#a86fe0",
+      "aim": "enemy_single_pick_element",
+      "duration": 12.0,
+      "text": "Muda a Afinidade de um inimigo para o elemento escolhido por 12 s. Também muda sua Resistência Elemental.",
+      "ops": [
+        {
+          "op": "rewrite_affinity",
+          "target": "aim_single",
+          "duration": 12.0
+        }
+      ]
+    },
+    {
+      "id": "orvalho",
+      "name": "Orvalho Curativo",
+      "cost": 30,
+      "category": "suporte",
+      "color": "#7fe8b0",
+      "aim": "ally_area",
+      "radius": 190.0,
+      "text": "Cura 22% do HP máx dos aliados numa área. Barato: dá para lançar duas vezes num combate.",
+      "ops": [
+        {
+          "op": "heal",
+          "target": "aim_area_ally",
+          "pct_max": 0.22,
+          "radius": 190.0
+        }
+      ]
+    },
+    {
+      "id": "circulo_de_seiva",
+      "name": "Círculo de Seiva",
+      "cost": 55,
+      "category": "suporte",
+      "color": "#5cd6a0",
+      "aim": "ally_area",
+      "radius": 230.0,
+      "text": "Cura 40% do HP máx numa área grande e remove 1 debuff de cada atingido.",
+      "ops": [
+        {
+          "op": "heal",
+          "target": "aim_area_ally",
+          "pct_max": 0.4,
+          "radius": 230.0
+        },
+        {
+          "op": "cleanse",
+          "target": "aim_area_ally",
+          "count": 1,
+          "radius": 230.0
+        }
+      ]
+    }
+  ]
+}

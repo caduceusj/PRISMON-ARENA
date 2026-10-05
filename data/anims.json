@@ -1,0 +1,134 @@
+{
+  "_doc": "Gerado por tools/build_anim_rig.py — medido dos sheets. Nao editar a mao.",
+  "_facing": "Os sprites olham para a ESQUERDA; a view espelha quando a unidade olha para a direita.",
+  "cell": 160,
+  "sheets": {
+    "attack": {
+      "cols": 4,
+      "frames": 18,
+      "fps": 18
+    },
+    "idle": {
+      "cols": 4,
+      "frames": 12,
+      "fps": 8
+    },
+    "walk": {
+      "cols": 3,
+      "frames": 6,
+      "fps": 10
+    }
+  },
+  "creatures": {
+    "apollo": {
+      "prefix": "apollo",
+      "hit_frame": 13,
+      "hit_fraction": 0.6667,
+      "bbox": [
+        53,
+        76,
+        92,
+        118
+      ],
+      "px_h": 42,
+      "px_w": 39,
+      "baseline": 118,
+      "bbox_idle": [
+        62,
+        76,
+        92,
+        117
+      ],
+      "px_h_idle": 41,
+      "px_w_idle": 30
+    },
+    "coalla": {
+      "prefix": "grass-coala",
+      "hit_frame": 11,
+      "hit_fraction": 0.5556,
+      "bbox": [
+        64,
+        86,
+        90,
+        120
+      ],
+      "px_h": 34,
+      "px_w": 26,
+      "baseline": 120,
+      "bbox_idle": [
+        65,
+        88,
+        90,
+        117
+      ],
+      "px_h_idle": 29,
+      "px_w_idle": 25
+    },
+    "hipocampo": {
+      "prefix": "hipocampo",
+      "hit_frame": 11,
+      "hit_fraction": 0.5556,
+      "bbox": [
+        60,
+        93,
+        90,
+        117
+      ],
+      "px_h": 24,
+      "px_w": 30,
+      "baseline": 117,
+      "bbox_idle": [
+        68,
+        94,
+        90,
+        117
+      ],
+      "px_h_idle": 23,
+      "px_w_idle": 22
+    },
+    "pinto_raio": {
+      "prefix": "pinto-raio",
+      "hit_frame": 11,
+      "hit_fraction": 0.5556,
+      "bbox": [
+        54,
+        71,
+        101,
+        117
+      ],
+      "px_h": 46,
+      "px_w": 47,
+      "baseline": 117,
+      "bbox_idle": [
+        69,
+        92,
+        85,
+        117
+      ],
+      "px_h_idle": 25,
+      "px_w_idle": 16
+    },
+    "sheep": {
+      "prefix": "sheep",
+      "hit_frame": 12,
+      "hit_fraction": 0.6111,
+      "bbox": [
+        61,
+        80,
+        95,
+        117
+      ],
+      "px_h": 37,
+      "px_w": 34,
+      "baseline": 117,
+      "bbox_idle": [
+        63,
+        82,
+        94,
+        117
+      ],
+      "px_h_idle": 35,
+      "px_w_idle": 31
+    }
+  }
+}

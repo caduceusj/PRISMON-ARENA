@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>PRISMA v0.2</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Pixelify+Sans:wght@600;700&display=swap">
+<style>
+  /* Paleta: a do próprio jogo (src/ui/ui.gd), não uma inventada para o documento. */
+  :root {
+    --bg:      #f6f4fb;
+    --panel:   #ffffff;
+    --panel2:  #eeebf6;
+    --line:    #d6d0e6;
+    --text:    #1b1826;
+    --dim:     #625b78;
+    --accent:  #5b47d6;
+    --good:    #1e8f60;
+    --bad:     #c3374c;
+    --gold:    #9a7a12;
+    --fogo:    #c4402a;
+    --gelo:    #2c7f96;
+    --agua:    #2a5fbe;
+    --raio:    #96790d;
+    --natureza:#3d8a3d;
+    --code:    #f0edf8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#0f0d18; --panel:#191627; --panel2:#221e33; --line:#2e2942;
+      --text:#e9e6f2; --dim:#9c94b5; --accent:#9d8dff; --good:#5cd6a0;
+      --bad:#e0576a; --gold:#f0d98a;
+      --fogo:#e8563a; --gelo:#7fd4e8; --agua:#5b95ea; --raio:#e8c53a; --natureza:#5cb85c;
+      --code:#141122; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0f0d18; --panel:#191627; --panel2:#221e33; --line:#2e2942;
+    --text:#e9e6f2; --dim:#9c94b5; --accent:#9d8dff; --good:#5cd6a0;
+    --bad:#e0576a; --gold:#f0d98a;
+    --fogo:#e8563a; --gelo:#7fd4e8; --agua:#5b95ea; --raio:#e8c53a; --natureza:#5cb85c;
+    --code:#141122; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px; line-height: 1.62;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px 110px; }
+  p { max-width: 70ch; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* --- capa --- */
+  header.cover { padding: 60px 0 26px; }
+  .kicker { font-family: "IBM Plex Mono", monospace; font-size: .76rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+  h1 { font-family: "Pixelify Sans", monospace; font-weight: 700;
+    font-size: clamp(3rem, 9vw, 5.4rem); letter-spacing: .1em; margin: .12em 0 .1em;
+    line-height: 1; color: var(--text); }
+  .tag { font-size: 1.14rem; color: var(--dim); max-width: 60ch; margin: 0 0 20px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 26px; font-family: "IBM Plex Mono", monospace;
+    font-size: .8rem; color: var(--dim); border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); padding: 12px 0; }
+  .meta b { color: var(--text); font-weight: 600; }
+
+  /* --- matriz herói --- */
+  .matrix-wrap { overflow-x: auto; margin: 30px 0 8px; }
+  table.matrix { border-collapse: separate; border-spacing: 4px; font-size: .74rem;
+    font-family: "IBM Plex Mono", monospace; }
+  table.matrix th { font-weight: 600; padding: 7px 9px; white-space: nowrap;
+    font-size: .72rem; letter-spacing: .04em; }
+  table.matrix th.corner { color: var(--dim); font-weight: 400; text-align: left;
+    font-size: .64rem; line-height: 1.25; }
+  table.matrix td { padding: 9px 8px; text-align: center; border-radius: 5px;
+    background: var(--panel2); color: var(--dim); min-width: 96px; }
+  table.matrix td.rx { color: #fff; font-weight: 600; }
+  table.matrix td.self { background: transparent; color: var(--line); }
+  .rx-note { font-size: .84rem; color: var(--dim); max-width: 68ch; }
+
+  /* --- estrutura --- */
+  h2 { font-size: 1.42rem; font-weight: 700; margin: 3.1em 0 .1em; padding-top: 1.3em;
+    border-top: 1px solid var(--line); text-wrap: balance; letter-spacing: -.01em; }
+  h2 .n { font-family: "Pixelify Sans", monospace; color: var(--accent);
+    margin-right: .5em; font-size: 1.1em; }
+  h3 { font-size: 1.02rem; font-weight: 600; margin: 2em 0 .3em; color: var(--text);
+    text-wrap: balance; }
+  h2 + p, h3 + p { margin-top: .5em; }
+  .sub { color: var(--dim); font-size: .94rem; margin-top: .2em; }
+
+  /* --- tabelas --- */
+  .tw { overflow-x: auto; margin: 15px 0 24px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--panel); }
+  table.d { border-collapse: collapse; width: 100%; font-size: .87rem; }
+  table.d th, table.d td { text-align: left; padding: 8px 12px;
+    border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.d th { font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+    text-transform: uppercase; letter-spacing: .07em; color: var(--dim);
+    background: var(--panel2); white-space: nowrap; font-weight: 600; }
+  table.d tr:last-child td { border-bottom: 0; }
+  .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+    white-space: nowrap; }
+  .nm { font-weight: 600; white-space: nowrap; }
+
+  /* --- marcadores de mudança: o eixo do documento --- */
+  .chg { display: inline-block; font-family: "IBM Plex Mono", monospace;
+    font-size: .62rem; letter-spacing: .09em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px; vertical-align: 2px;
+    background: var(--accent); color: #fff; font-weight: 600; margin-left: 8px; }
+  .chg.novo { background: var(--good); color: #04231a; }
+  .chg.fora { background: var(--bad); color: #fff; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .chg { color: #120f20; }
+    :root:not([data-theme="light"]) .chg.fora { color: #1a0509; }
+  }
+  :root[data-theme="dark"] .chg { color: #120f20; }
+  :root[data-theme="dark"] .chg.fora { color: #1a0509; }
+
+  blockquote { margin: 16px 0; padding: 10px 0 10px 18px;
+    border-left: 3px solid var(--accent); color: var(--text); font-style: italic; }
+  blockquote cite { display: block; font-style: normal; font-size: .8rem;
+    color: var(--dim); margin-top: 5px; }
+
+  .callout { background: var(--panel2); border: 1px solid var(--line);
+    border-radius: 8px; padding: 13px 17px; margin: 18px 0; font-size: .92rem; }
+  .callout p { margin: .35em 0; max-width: none; }
+  .callout .lbl { font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
+    font-weight: 600; display: block; margin-bottom: 3px; }
+  .callout.warn { border-color: var(--bad); }
+  .callout.warn .lbl { color: var(--bad); }
+
+  code { font-family: "IBM Plex Mono", monospace; font-size: .85em;
+    background: var(--code); padding: 1px 5px; border-radius: 4px;
+    border: 1px solid var(--line); }
+  pre { background: var(--code); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; overflow-x: auto; font-size: .78rem; line-height: 1.5;
+    font-family: "IBM Plex Mono", monospace; }
+  pre code { background: none; border: 0; padding: 0; }
+
+  ul { padding-left: 1.15em; } li { margin: .28em 0; max-width: 68ch; }
+  .ok  { color: var(--good); font-weight: 600; }
+  .no  { color: var(--bad);  font-weight: 600; }
+  .el-fogo{color:var(--fogo)} .el-gelo{color:var(--gelo)} .el-agua{color:var(--agua)}
+  .el-raio{color:var(--raio)} .el-nat{color:var(--natureza)}
+
+  .foot { margin-top: 72px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: .82rem; color: var(--dim); }
+</style>
+
+
+<style>
+  /* --- ajustes só para impressão / PDF --- */
+  @page { size: A4; margin: 16mm 14mm 18mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10.2pt; line-height: 1.5; background: #fff; }
+  .wrap { max-width: 100%; padding: 0; }
+  p, li { max-width: none; }
+
+  /* a capa ocupa a primeira pagina inteira */
+  header.cover { padding: 4mm 0 6mm; break-after: avoid; }
+  h1 { font-size: 46pt; margin: .05em 0; }
+  .tag { font-size: 12pt; max-width: none; }
+
+  /* nada de titulo orfao no rodape, nem tabela partida no meio */
+  h2 { break-after: avoid; break-inside: avoid; margin-top: 9mm; padding-top: 5mm;
+       font-size: 15pt; }
+  h3 { break-after: avoid; break-inside: avoid; font-size: 11pt; margin-top: 6mm; }
+  .tw, .callout, blockquote, pre, .matrix-wrap { break-inside: avoid; }
+  tr, li { break-inside: avoid; }
+  table.d { font-size: 8.6pt; }
+  table.d th, table.d td { padding: 4pt 7pt; }
+  table.matrix { font-size: 7.4pt; }
+  table.matrix td { min-width: 0; padding: 5pt 4pt; }
+  pre { font-size: 8pt; }
+  .chg { font-size: 6.4pt; }
+
+  /* cada secao grande comeca em pagina nova, para o documento folhear bem */
+  #s3, #s5, #s7, #s9 { break-before: page; }
+  .foot { break-inside: avoid; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <div class="kicker">Game Design Document · v0.2 · reconciliado com o build</div>
+  <h1>PRISMA</h1>
+  <p class="tag">Você não comanda monstros. Você comanda o campo elemental em que eles lutam.</p>
+  <div class="meta">
+    <span><b>Autor</b> João Anísio Marinho da Nóbrega</span>
+    <span><b>Decisões de design</b> Arthur (ACTSAN)</span>
+    <span><b>Motor</b> Godot 4.7.2 · GDScript</span>
+    <span><b>Data</b> 31/08/2026</span>
+  </div>
+</header>
+
+<p>Este documento é o GDD v0.1 <b>corrigido para bater com o que está rodando</b>. Onde o build diverge do documento original, a divergência está marcada e explicada — nenhuma foi acidental: todas vieram de decisões tomadas durante a prototipagem. Todo número aqui foi lido dos arquivos em <code>data/</code>, não de memória.</p>
+
+<div class="callout">
+  <span class="lbl">Como ler as marcas</span>
+  <p><span class="chg">mudou</span> difere do GDD v0.1 &nbsp;·&nbsp; <span class="chg novo">novo</span> não existia no v0.1 &nbsp;·&nbsp; <span class="chg fora">fora do slice</span> desenhado, ainda não implementado</p>
+</div>
+
+<h2><span class="n">1</span>O jogo em uma frase</h2>
+<p>Um <b>autobattler roguelite</b> onde o combate se resolve sozinho e a decisão do jogador é <i>montar a máquina antes</i> — quais criaturas, de quais elementos, em que ordem elas se atingem. O dano bruto é secundário. O que ganha combate é <b>reação elemental</b>: uma aura no alvo, um golpe de outro elemento por cima.</p>
+
+<h3>O laço</h3>
+<pre><code>escolher entre DOIS COMBATES  →  preparar  →  o combate roda sozinho
+        ↑                                              ↓
+        └──────  momento de evento (recruta / loja / acaso)  ←──┘</code></pre>
+
+<h2><span class="n">2</span>A matriz de reações</h2>
+<p class="sub">O coração do jogo. Cinco elementos, cinco auras, 16 pares ordenados, 8 reações nomeadas.</p>
+
+<p>Todo golpe carrega um elemento e deposita <b>UA</b> (unidades de aura) no alvo. Quando um golpe de elemento X acerta um alvo que já carrega a aura de Y, dispara a reação da célula. A ordem importa: a mesma dupla rende multiplicadores diferentes conforme quem chegou primeiro.</p>
+
+<div class="matrix-wrap">
+<table class="matrix">
+  <tr>
+    <th class="corner">aura no alvo ↓<br>golpe que chega →</th>
+    <th class="el-fogo">FOGO</th><th class="el-gelo">GELO</th><th class="el-agua">ÁGUA</th>
+    <th class="el-raio">RAIO</th><th class="el-nat">NATUREZA</th>
+  </tr>
+  <tr>
+    <th class="el-fogo">Combustão</th>
+    <td class="self">—</td>
+    <td class="rx" style="background:#ff7a3a">Derretimento</td>
+    <td class="rx" style="background:#3a86b8">Vaporizar</td>
+    <td class="rx" style="background:#d9860e">Detonação</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <th class="el-gelo">Gélido</th>
+    <td class="rx" style="background:#ff7a3a">Derretimento</td>
+    <td class="self">—</td>
+    <td class="rx" style="background:#3f9db5">Congelar</td>
+    <td class="rx" style="background:#7d63c9">Supercondução</td>
+    <td class="rx" style="background:#4e9c74">Geada Mortal</td>
+  </tr>
+  <tr>
+    <th class="el-agua">Encharcado</th>
+    <td class="rx" style="background:#3a86b8">Vaporizar</td>
+    <td class="rx" style="background:#3f9db5">Congelar</td>
+    <td class="self">—</td>
+    <td class="rx" style="background:#b08d0d">Eletrocussão</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <th class="el-raio">Carga</th>
+    <td class="rx" style="background:#d9860e">Detonação</td>
+    <td class="rx" style="background:#7d63c9">Supercondução</td>
+    <td class="rx" style="background:#b08d0d">Eletrocussão</td>
+    <td class="self">—</td>
+    <td class="rx" style="background:#4a9c33">Catalisação</td>
+  </tr>
+  <tr>
+    <th class="el-nat">Esporo</th>
+    <td>—</td>
+    <td class="rx" style="background:#4e9c74">Geada Mortal</td>
+    <td>—</td>
+    <td class="rx" style="background:#4a9c33">Catalisação</td>
+    <td class="self">—</td>
+  </tr>
+</table>
+</div>
+<p class="rx-note">As lacunas (Esporo + Fogo, Esporo + Água, Combustão + Natureza, Encharcado + Natureza) são <b>deliberadas</b> — §6.6 do v0.1. Nem toda dupla reage; escolher elementos que <i>se conversam</i> é a decisão.</p>
+
+<h3>O que cada reação faz</h3>
+<div class="tw"><table class="d">
+<tr><th>Reação</th><th>Tipo</th><th>Efeito</th><th>Aura</th></tr>
+<tr><td class="nm" style="color:var(--fogo)">Derretimento</td><td>amplificar</td><td class="num">×2,0 direto · ×1,5 reverso</td><td>consome tudo</td></tr>
+<tr><td class="nm" style="color:var(--gelo)">Vaporizar</td><td>amplificar</td><td class="num">×1,5 · ×1,25 — reduz DEF dos próximos</td><td>consome tudo</td></tr>
+<tr><td class="nm" style="color:var(--raio)">Detonação</td><td>transformar</td><td class="num">×1,5 de Fogo em raio 140</td><td>consome 2 UA</td></tr>
+<tr><td class="nm" style="color:var(--raio)">Eletrocussão</td><td>transformar</td><td class="num">×1,0 de Raio, alvo único</td><td><b>não consome</b> — encadeia</td></tr>
+<tr><td class="nm" style="color:var(--accent)">Supercondução</td><td>transformar</td><td class="num">×0,8 de Raio em raio 120 + reduz DEF</td><td>consome 2 UA</td></tr>
+<tr><td class="nm" style="color:var(--gelo)">Congelar</td><td>catalítica</td><td>congela o alvo (Controle, escala por Vontade)</td><td>consome 2 UA</td></tr>
+<tr><td class="nm" style="color:var(--natureza)">Catalisação <span class="chg novo">novo</span></td><td>transformar</td><td class="num">×0,7 de Raio + <b>8 de Energia</b> ao Domador</td><td>consome 2 UA</td></tr>
+<tr><td class="nm" style="color:var(--natureza)">Geada Mortal <span class="chg novo">novo</span></td><td>transformar</td><td class="num">×1,2 de Gelo + 4% do HP máx do alvo</td><td>consome 2 UA</td></tr>
+</table></div>
+
+<div class="callout">
+  <span class="lbl">Por que Natureza entrou no slice <span class="chg">mudou</span></span>
+  <p>O v0.1 fechava o slice em quatro elementos. O Coalla — uma das cinco criaturas que o Arthur mandou — é <i>grass</i>. Em vez de reelementá-lo, Natureza entrou com as duas reações mais simples do §6 do v0.1. <b>Catalisação virou o motor da economia de Ativos</b>: é a única reação que devolve Energia, e foi ela que tirou a métrica de Ativos/combate do vermelho.</p>
+</div>
+
+<h3>Regras de aura</h3>
+<ul>
+  <li>Teto de <b>8 UA</b> por aura; no máximo <b>2 auras</b> simultâneas por alvo.</li>
+  <li><b>Encharcado amplifica</b>: uma aura aplicada sobre Encharcado entra 25% mais forte.</li>
+  <li>Auras decaem por segundo. Reações Amplificadoras consomem a aura inteira; Transformadoras consomem 2 UA; Eletrocussão não consome nada — por isso encadeia.</li>
+  <li><b>Esporo</b> causa 2 de dano/s dobrando a cada 3 s, até 5×. O Eco de Natureza reduz para 2 s.</li>
+</ul>
+
+<h2 id="s3"><span class="n">3</span>Estrutura da run</h2>
+
+<blockquote>
+  "As duas opções pro jogador tem que ser 2 combates. Os eventos não são automáticos, eles só são momentos separados. Quando é pra brigar, o jogador vai ser sempre brigar."
+  <cite>Arthur, 30–31/08/2026</cite>
+</blockquote>
+
+<p>O v0.1 tinha <b>11 tipos de nó</b> e o jogador escolhia entre eles — podia trocar um combate por uma visita ao Ninho. Isso caiu. <span class="chg">mudou</span></p>
+
+<p>A run agora alterna <b>momentos</b>. O jogador nunca escolhe o <i>caminho</i>; ele escolhe <i>dentro</i> de cada momento.</p>
+
+<div class="tw"><table class="d">
+<tr><th>Momento</th><th>O jogo decide</th><th>O jogador decide</th></tr>
+<tr><td class="nm">Combate</td><td>quais dois combates aparecem</td><td><b>qual dos dois</b> — nunca combate-ou-evento</td></tr>
+<tr><td class="nm">Recruta <span class="chg novo">novo</span></td><td>que duas criaturas aparecem</td><td><b>qual das duas</b> entra no elenco (ou nenhuma)</td></tr>
+<tr><td class="nm">Loja <span class="chg novo">novo</span></td><td>o estoque da banca</td><td><b>o que comprar</b>, com Éter e com ingredientes</td></tr>
+<tr><td class="nm">Acaso <span class="chg novo">novo</span></td><td>qual evento apareceu</td><td><b>entrar ou não</b> no evento</td></tr>
+</table></div>
+
+<h3>A sequência de um Ato</h3>
+<pre><code>INICIAIS  →  1 ▸ recruta ▸ 2 ▸ acaso ▸ 3 ▸ recruta ▸ 4 ▸ loja
+          →  5 ▸ recruta ▸ 6 ▸ acaso ▸ 7 ▸ recruta ▸ 8 ▸ loja  →  CHEFE
+
+os números são combates (sempre 2 opções); as palavras são momentos de evento</code></pre>
+<p class="sub">Em <code>data/tuning.json → momentos.evento_apos_combate</code>. Quatro recrutas levam o elenco de 2 a 6 — exatamente o teto de Vínculo.</p>
+
+<h3>Escolha dos iniciais <span class="chg novo">novo</span></h3>
+<p>Antes do primeiro combate o jogador monta a dupla que abre a jornada. Ao marcar duas criaturas, a tela mostra <b>quais reações a dupla produz</b> — a primeira decisão do jogo já é sobre a máquina elemental, não sobre qual bicho é mais bonito. As dez duplas possíveis foram medidas: todas viáveis, entre 55% e 85% de vitória.</p>
+
+<h3>Recrutar dá a criatura inteira <span class="chg">mudou</span></h3>
+<blockquote>"Tipo chocar ovo, acho ruim. Acho melhor pegar o pokemon inteiro."<cite>Arthur</cite></blockquote>
+<p>A Incubadora e o sistema de ovos saíram. <b>A Muda</b> (evoluir juntando cópias) continua no código, mas dorme: ela só liga para espécies com <code>evolves_to</code> nos dados, e o elenco de teste não tem linhas evolutivas. Volta sozinha quando houver.</p>
+
+<h2><span class="n">4</span>Elenco de teste</h2>
+<p class="sub">Cinco criaturas, com animação de ataque, parada e caminhada. <span class="chg">mudou</span> — o v0.1 previa 12 espécies + evoluções.</p>
+
+<div class="tw"><table class="d">
+<tr><th>Criatura</th><th>Elemento</th><th>Papel</th><th>Postura</th><th class="num">HP</th><th class="num">ATK</th><th class="num">DEF</th><th class="num">VEL</th><th class="num">PE</th><th class="num">Vont.</th><th class="num">UA</th></tr>
+<tr><td class="nm" style="color:var(--gelo)">Sheep</td><td>Gelo</td><td>Guardião</td><td>Vanguarda</td><td class="num">780</td><td class="num">24</td><td class="num">48</td><td class="num">0,8</td><td class="num">25</td><td class="num">70</td><td class="num">2,0</td></tr>
+<tr><td class="nm" style="color:var(--agua)">Hipocampo</td><td>Água</td><td>Arcano</td><td>Meio</td><td class="num">420</td><td class="num">31</td><td class="num">18</td><td class="num">1,6</td><td class="num">78</td><td class="num">45</td><td class="num">3,0</td></tr>
+<tr><td class="nm" style="color:var(--raio)">Pinto-Raio</td><td>Raio</td><td>Arcano</td><td>Meio</td><td class="num">380</td><td class="num">34</td><td class="num">14</td><td class="num">1,7</td><td class="num">88</td><td class="num">35</td><td class="num">2,0</td></tr>
+<tr><td class="nm" style="color:var(--fogo)">Apollo</td><td>Fogo</td><td>Lâmina</td><td>Retaguarda</td><td class="num">350</td><td class="num">66</td><td class="num">10</td><td class="num">1,9</td><td class="num">15</td><td class="num">30</td><td class="num">2,0</td></tr>
+<tr><td class="nm" style="color:var(--natureza)">Coalla</td><td>Natureza</td><td>Curandeiro</td><td>Suporte</td><td class="num">460</td><td class="num">20</td><td class="num">22</td><td class="num">1,1</td><td class="num">70</td><td class="num">55</td><td class="num">2,0</td></tr>
+</table></div>
+
+<h3>Ultimates</h3>
+<div class="tw"><table class="d">
+<tr><th>Criatura</th><th>Ultimate</th><th>Efeito</th></tr>
+<tr><td class="nm">Sheep</td><td class="nm">Muralha de Lã</td><td>Escudo de 90 a si e ao aliado mais ferido.</td></tr>
+<tr><td class="nm">Hipocampo</td><td class="nm">Jato Contínuo</td><td>5 UA de Encharcado em alvo único.</td></tr>
+<tr><td class="nm">Pinto-Raio</td><td class="nm">Arco Voltaico</td><td>Encadeia entre 3 inimigos aplicando 2 UA de Carga.</td></tr>
+<tr><td class="nm">Apollo</td><td class="nm">Cauda Solar</td><td>Golpe ×1,2 que aplica Ferida por 3 s (cura recebida = 0).</td></tr>
+<tr><td class="nm">Coalla</td><td class="nm">Sesta Revigorante</td><td>Cura 15% do HP máx ao aliado mais ferido.</td></tr>
+</table></div>
+
+<h3>O golpe conecta no quadro certo <span class="chg novo">novo</span></h3>
+<p>Cada sprite tem um quadro em que o golpe visivelmente acerta. O Arthur apontou qual é para cada criatura, e a simulação <b>agenda o dano exatamente ali</b> — a animação de ataque estica sobre o intervalo inteiro e o dano cai em <code>intervalo × (quadro−1)/18</code>. Quem está armando o golpe fica <b>plantado</b>, não anda.</p>
+
+<div class="tw"><table class="d">
+<tr><th>Criatura</th><th class="num">Quadro de dano</th><th class="num">Fração do ataque</th></tr>
+<tr><td class="nm">Apollo</td><td class="num">13 / 18</td><td class="num">67%</td></tr>
+<tr><td class="nm">Sheep</td><td class="num">12 / 18</td><td class="num">61%</td></tr>
+<tr><td class="nm">Coalla · Hipocampo · Pinto-Raio</td><td class="num">11 / 18</td><td class="num">56%</td></tr>
+</table></div>
+<p class="sub">Folhas de 160×160 px: ataque 18 quadros a 18 fps, parada 12 a 8 fps, caminhada 6 a 10 fps. Recortes e linha de chão medidos por <code>tools/build_anim_rig.py</code> → <code>data/anims.json</code>.</p>
+
+<h2 id="s5"><span class="n">5</span>Combate</h2>
+
+<h3>Papéis e movimento <span class="chg">mudou</span></h3>
+<blockquote>"Quero que os personagens se mexam e se locomovam dentro da arena enquanto brigam, que nem How Many Dudes."<cite>João</cite></blockquote>
+<p>O v0.1 resolvia o combate com unidades paradas em faixas. Agora <b>a Postura decide quem atacar</b> (§7.2 do v0.1) e <b>o Papel decide como se mover</b>. A direção de aproximação vem da <i>casa</i> da unidade, não da posição atual — sem isso todo mundo converge no mesmo vetor e o campo vira uma bola.</p>
+
+<div class="tw"><table class="d">
+<tr><th>Papel</th><th class="num">Alcance</th><th class="num">Velocidade</th><th class="num">Distância mantida</th><th>Comportamento</th></tr>
+<tr><td class="nm">Guardião</td><td class="num">76</td><td class="num">96</td><td class="num">—</td><td>fecha distância e segura a linha</td></tr>
+<tr><td class="nm">Lâmina</td><td class="num">72</td><td class="num">148</td><td class="num">—</td><td>o mais rápido; mergulha na retaguarda</td></tr>
+<tr><td class="nm">Arcano</td><td class="num">265</td><td class="num">78</td><td class="num">225</td><td>mantém distância e aplica aura</td></tr>
+<tr><td class="nm">Curandeiro</td><td class="num">305</td><td class="num">84</td><td class="num">275</td><td>fica perto de quem precisa, longe da briga</td></tr>
+</table></div>
+
+<div class="callout">
+  <span class="lbl">A máscara de alcance <span class="chg novo">novo</span></span>
+  <p><b>Era o bug mais caro do projeto.</b> A separação de corpos rodava <i>depois</i> do movimento e não sabia nada sobre alcance: a unidade chegava na borda, o aliado a empurrava para fora, ela voltava, era empurrada de novo — e nunca batia.</p>
+  <p>Correção: nenhum empurrão pode tirar uma unidade do alcance do seu alvo. Depois de separar, quem passou do ponto é puxado de volta. Quem já está encaixado recebe só 30% do empurrão, então o clinch parou de tremer.</p>
+  <p>Medido em 4×4 só corpo a corpo: tempo <b>dentro do alcance do próprio alvo passou de 57,4% para 99,7%</b>. As unidades passavam 43% do combate sem conseguir bater.</p>
+</div>
+
+<h3>A Mão do Domador</h3>
+<p>A única intervenção do jogador durante o combate. Energia acumula a <b>+2/s</b>, <b>+1 por reação</b> da sua equipe e <b>+5 por aliado morto</b>. Quatro Ativos:</p>
+<div class="tw"><table class="d">
+<tr><th>Ativo</th><th class="num">Custo</th><th>Efeito</th></tr>
+<tr><td class="nm">Chuva Torrencial</td><td class="num">35</td><td>5 UA de Encharcado em <b>todos</b> os inimigos — o maior habilitador de reação do jogo.</td></tr>
+<tr><td class="nm">Meteoro</td><td class="num">40</td><td>120 de dano de Fogo em área + 4 UA de Combustão.</td></tr>
+<tr><td class="nm">Bênção Aurora</td><td class="num">45</td><td>Cura 25% do HP máx da equipe e remove 1 debuff por unidade.</td></tr>
+<tr><td class="nm">Prisma de Reescrita</td><td class="num">50</td><td>Muda a Afinidade de um inimigo por 12 s — inclusive a Resistência.</td></tr>
+</table></div>
+
+<h3>Ressonância</h3>
+<p>Peso elemental na equipe destrava bônus passivos: <b>Eco</b> a partir de 2 unidades do elemento, <b>Coro</b> a partir de 4. (<b>Ápice</b> a 6 está desenhado mas fora do slice. <span class="chg fora">fora do slice</span>)</p>
+<div class="tw"><table class="d">
+<tr><th>Elemento</th><th>Eco (2)</th><th>Coro (4)</th></tr>
+<tr><td class="nm el-fogo">Fogo</td><td>+20% de dano de reação</td><td>Combustão empilha até 2× (teto 16 UA)</td></tr>
+<tr><td class="nm el-gelo">Gelo</td><td>Gélido também reduz 10% de velocidade</td><td>Inimigos com Gélido recebem +15% de dano</td></tr>
+<tr><td class="nm el-agua">Água</td><td>Encharcado dura +50%</td><td>Todos os aliados aplicam +1 UA</td></tr>
+<tr><td class="nm el-raio">Raio</td><td>+10% de chance de crítico</td><td>Carga acumula 25% mais rápido</td></tr>
+<tr><td class="nm el-nat">Natureza</td><td>Esporo dobra a cada 2 s em vez de 3 s</td><td>—</td></tr>
+</table></div>
+
+<h2><span class="n">6</span>Comida: buffs permanentes</h2>
+<blockquote>"Tire esse sistema de provisões. Quando eu falei comida, falei tipo aquelas refeições do How Many Dudes, que dão buffs permanentes."<cite>João</cite></blockquote>
+<p>O <b>upkeep</b> do v0.1 — pagar comida por nó para não perder unidade — foi removido inteiro. <span class="chg">mudou</span> No lugar ficaram a <b>Nutrição</b> (§12.3) e a <b>Transmutação</b> (§12.4) do próprio v0.1: pratos custam ingredientes e dão bônus <b>permanentes</b>. Cada unidade tem <b>Estômago 3</b> — o limite de pratos que aceita, e é aí que mora a decisão.</p>
+<div class="tw"><table class="d">
+<tr><th>Prato</th><th class="num">Custo</th><th>Efeito permanente</th></tr>
+<tr><td class="nm">Espeto Flamejante</td><td class="num">2 Fogo</td><td>+10 ATK</td></tr>
+<tr><td class="nm">Sorvete de Névoa</td><td class="num">2 Gelo</td><td>+25 Vontade; encurta todo Controle sofrido</td></tr>
+<tr><td class="nm">Caldo Elétrico</td><td class="num">2 Raio</td><td>+0,3 VEL — mais golpes/s significa mais aura aplicada</td></tr>
+<tr><td class="nm">Ensopado de Raízes</td><td class="num">2 Natureza</td><td>+80 HP</td></tr>
+<tr><td class="nm">Banquete do Dilúvio</td><td class="num">3 Água</td><td>+1 slot de item, ignorando o limite da forma</td></tr>
+<tr><td class="nm">Guisado Cromático</td><td class="num">misto</td><td>Muda a Afinidade da unidade para o elemento escolhido</td></tr>
+<tr><td class="nm">Doce do Esquecimento</td><td class="num">misto</td><td>Esvazia o Estômago e devolve 50% dos ingredientes</td></tr>
+</table></div>
+<p><b>Cozinhar deixou de ser automático.</b> <span class="chg">mudou</span> Os pratos são comprados na Loja, pagos em ingredientes — o jogador escolhe qual prato, e para qual criatura.</p>
+
+<h2 id="s7"><span class="n">7</span>Economia</h2>
+
+<h3>Éter finalmente tem dreno <span class="chg">mudou</span></h3>
+<p>Com a Feira eliminada junto dos nós de evento, o Éter tinha virado só pontuação. A <b>Loja</b> resolve isso: é o único lugar onde Éter sai do bolso.</p>
+<div class="tw"><table class="d">
+<tr><th>Na banca</th><th class="num">Preço</th><th>Observação</th></tr>
+<tr><td class="nm">Item Comum</td><td class="num">11 Éter</td><td rowspan="2">3 itens sorteados por visita</td></tr>
+<tr><td class="nm">Item Raro</td><td class="num">24 Éter</td></tr>
+<tr><td class="nm">Relíquia</td><td class="num">38 Éter</td><td>aparece em 45% das visitas</td></tr>
+<tr><td class="nm">Descanso</td><td class="num">14 Éter</td><td>recupera 45% do HP da equipe</td></tr>
+<tr><td class="nm">Prato</td><td class="num">ingredientes</td><td>2 opções por visita, entre as que a despensa banca</td></tr>
+</table></div>
+
+<h3>Eventos de acaso <span class="chg novo">novo</span></h3>
+<p>Sete eventos em <code>data/random_events.json</code>. O jogo sorteia qual aparece; o jogador decide se entra. <b>Recusar nunca custa nada</b> — o preço de recusar é a chance perdida.</p>
+<div class="tw"><table class="d">
+<tr><th>Evento</th><th>Aceitar</th><th>Desfechos</th></tr>
+<tr><td class="nm">Veio de Éter</td><td>Cavar</td><td class="num">70% +14 Éter e −10% HP · 30% +4 Éter e −22% HP</td></tr>
+<tr><td class="nm">Fonte Termal</td><td>Mergulhar</td><td class="num">75% cura 55% · 25% −12% HP, +6 Éter</td></tr>
+<tr><td class="nm">Altar Rachado</td><td>Quebrar</td><td class="num">45% relíquia · 30% +18 Éter · 25% −28% HP</td></tr>
+<tr><td class="nm">Caravana Perdida</td><td>Escoltar</td><td class="num">60% item + 8 Éter · 40% 3 ingredientes</td></tr>
+<tr><td class="nm">Pomar Selvagem</td><td>Colher</td><td class="num">65% 4 ingredientes · 35% 2 ingredientes e −18% HP</td></tr>
+<tr><td class="nm">Cozinheiro Errante</td><td>Provar</td><td class="num">80% prato de graça · 20% −15% HP</td></tr>
+<tr><td class="nm">Ninho Abandonado</td><td>Vasculhar</td><td class="num">55% item · 45% +11 Éter</td></tr>
+</table></div>
+
+<h3>Vínculo, Relíquias e Itens</h3>
+<ul>
+  <li><b>Vínculo</b> começa em 6 e é o teto de criaturas em campo. Sobe para 8 no nó 5.</li>
+  <li><b>10 Relíquias</b> — modificadores de run inteira, com custo real: <i>Vidro Ativo</i> dobra a Energia mas tira 30% do HP máximo; <i>Ampulheta Quebrada</i> encurta os combates para 25 s em troca de +50% de recompensa.</li>
+  <li><b>14 Itens</b> equipáveis, incluindo os quatro Núcleos que mudam a Afinidade de uma unidade — a ferramenta de conserto quando a composição não fecha reação.</li>
+</ul>
+
+<h2><span class="n">8</span>Inimigos e o Chefe</h2>
+<p>Dez temas, cada um com sua paleta elemental e sua arena. <b>O perigo é letalidade medida, não tema</b> <span class="chg">mudou</span> — a Ninhada Ígnea (só Apollos, ATK 66) é o encontro mais letal do começo do jogo, e agora vale 3★; times com Curandeiro diluem dano e valem menos.</p>
+
+<div class="tw"><table class="d">
+<tr><th class="num">Perigo</th><th>Tema</th><th>Elementos</th><th>Arena e seu efeito</th></tr>
+<tr><td class="num">★</td><td class="nm">Cardume Profundo</td><td class="el-agua">Água</td><td>Chuva Constante — todos recebem 2 UA de Encharcado a cada 3 s</td></tr>
+<tr><td class="num">★★</td><td class="nm">Bosque Úmido</td><td>Água / Natureza</td><td rowspan="2">Bosque Vivo — Esporo escala 2× mais rápido; +2 ingredientes</td></tr>
+<tr><td class="num">★★</td><td class="nm">Faísca no Mato</td><td>Raio / Natureza</td></tr>
+<tr><td class="num">★★★</td><td class="nm">Ninhada Ígnea</td><td class="el-fogo">Fogo</td><td>Solo Vulcânico — 3 dano/s a todos; Combustão dura +50%</td></tr>
+<tr><td class="num">★★★</td><td class="nm">Enxame Estático</td><td class="el-raio">Raio</td><td>Campo Magnético — Carga acumula 2× mais rápido, dispara em alvos aleatórios</td></tr>
+<tr><td class="num">★★★</td><td class="nm">Bruma Fervente</td><td>Fogo / Água</td><td>Chuva Constante</td></tr>
+<tr><td class="num">★★★★</td><td class="nm">Tempestade Gélida</td><td>Gelo / Raio</td><td rowspan="2">Nevasca — −25% VEL global; Gélido não decai</td></tr>
+<tr><td class="num">★★★★</td><td class="nm">Geada Viva</td><td>Gelo / Natureza</td></tr>
+<tr><td class="num">★★★★</td><td class="nm">Vapor Elétrico</td><td>Água / Raio</td><td>Campo Magnético</td></tr>
+<tr><td class="num">★★★★★</td><td class="nm">Cinzas Congeladas</td><td>Fogo / Gelo</td><td>Solo Vulcânico</td></tr>
+</table></div>
+
+<h3>Escalada de dificuldade <span class="chg">mudou</span></h3>
+<blockquote>"Revise os números pra ter uma introdução mais natural e menos pesada, pra que o trecho inicial comece já com algumas vitórias e ir escalando."<cite>João</cite></blockquote>
+<p>O diagnóstico mostrou o oposto do desejado: <b>26% das runs morriam no nó 1</b>. A curva foi invertida — o poder inimigo vai de <b>0,62 no primeiro combate a 1,60 no oitavo</b> (chefe a 2,10), e o cardápio de temas é escalonado por nó: o nó 1 só sorteia temas leves, e do nó 6 em diante as duas opções são pesadas.</p>
+<p>Resultado medido: <b>100% de vitória no primeiro combate</b>, zero mortes nos nós 1 e 2, mortes escalando do nó 3 ao 8.</p>
+
+<h3>O Devorador — Chefe I</h3>
+<p>Um Coalla imenso (4500 HP, 130 px). <b>Não tem resistências</b>: qualquer build vence. O que ele testa é <b>economia</b> — a Fome Insaciável come os ingredientes da despensa durante o combate. Quem cozinhou tudo e não guardou nada vence na raça; quem guardou, vence com folga. Escolta de Faísca no Mato (Raio/Natureza).</p>
+
+<h2 id="s9"><span class="n">9</span>Balanceamento aferido</h2>
+<p class="sub">250 runs simuladas por <code>tools/autoplay.tscn</code>, contra os alvos do §17.4 do v0.1.</p>
+
+<div class="tw"><table class="d">
+<tr><th>Métrica</th><th class="num">Alvo</th><th class="num">Antes da máscara</th><th class="num">Agora</th><th></th></tr>
+<tr><td>Combates que estouram 45 s</td><td class="num">&lt; 6%</td><td class="num">16%</td><td class="num">6%</td><td class="ok">✓</td></tr>
+<tr><td>Ativos por combate</td><td class="num">1,5–2,5</td><td class="num">1,47</td><td class="num">1,55</td><td class="ok">✓</td></tr>
+<tr><td>Reações por combate</td><td class="num">5–45</td><td class="num">26,1</td><td class="num">37,6</td><td class="ok">✓</td></tr>
+<tr><td>Runs que cozinharam</td><td class="num">&gt; 70%</td><td class="num">53%</td><td class="num">89%</td><td class="ok">✓</td></tr>
+<tr><td>Vitória da run</td><td class="num">35–45%</td><td class="num">65%</td><td class="num">52%</td><td class="no">✗</td></tr>
+<tr><td>Duração de combate (mediana)</td><td class="num">28 s</td><td class="num">13,7 s</td><td class="num">13,3 s</td><td class="no">✗</td></tr>
+</table></div>
+
+<p><b>Quatro dos seis alvos verdes</b> — o melhor estado do protótipo até aqui. As duas exceções são conhecidas e diferentes entre si:</p>
+<ul>
+  <li><b>Vitória em 52%</b> é <i>escolha</i>, não falha: o pedido foi uma introdução generosa que escala. O alvo de 35–45% do v0.1 volta a valer quando houver mais conteúdo tardio.</li>
+  <li><b>Mediana de 13,3 s contra 28 s</b> é uma contradição interna do v0.1: as estatísticas do §18 não produzem os 28 s de ritmo do §17.4. O <code>hp_scale</code> (hoje 3,7×) existe exatamente para mediar isso — subi-lo alonga o combate mas devolve o problema de timeout.</li>
+</ul>
+
+<h2><span class="n">10</span>Arquitetura</h2>
+<p>Duas regras do v0.1 que o build segue à risca, e que são o motivo de este documento poder ser gerado dos dados:</p>
+<ul>
+  <li><b>§22.1 — dado fora do código.</b> Todo conteúdo e todo número de balanceamento vive em JSON sob <code>data/</code>. Nenhum <code>.gd</code> tem número de balanceamento. Cada tabela deste documento foi lida direto desses arquivos.</li>
+  <li><b>§22.3 — simulação headless e determinística.</b> <code>CombatSim</code> nunca toca em nó de cena; a camada visual é uma observadora que consome eventos. Tique de 10 Hz, RNG semeado. Mesma semente, mesmo combate — é o que permite simular 250 runs em segundos para aferir o balanceamento.</li>
+</ul>
+
+<h3>Cobertura de teste</h3>
+<p><b>105 asserções</b> em <code>tools/smoke_test.tscn</code>, incluindo: o golpe cai no quadro que o Arthur pediu; nenhuma unidade trava fora de alcance; montar uma oferta de evento não aplica nada sozinha; as duas opções de nó são sempre combates; o primeiro combate é vencível.</p>
+
+<div class="callout warn">
+  <span class="lbl">Pendências antes de qualquer publicação</span>
+  <p><b>Fonte.</b> A Pixel Sans Serif é <i>"free for personal use"</i> no dafont. Serve para protótipo; trava lançamento comercial. É preciso comprar licença ou trocar.</p>
+  <p><b>Sprites.</b> A origem e a licença das cinco criaturas precisam ser confirmadas com o Arthur.</p>
+  <p><b>Ícones.</b> Os pacotes da Kenney são CC0, mas o pacote Shikashi's Fantasy Icons deriva de game-icons.net e é <b>CC BY 3.0</b> — exige atribuição no jogo publicado.</p>
+</div>
+
+<h2><span class="n">11</span>O que ficou de fora</h2>
+<div class="tw"><table class="d">
+<tr><th>Sistema</th><th>Estado</th></tr>
+<tr><td class="nm">Trevas, Vento, Terra, Luz</td><td>Nos dados, fora do slice. Trevas já tem aura (Maldição) definida.</td></tr>
+<tr><td class="nm">Ápice de Ressonância (6 unidades)</td><td>Limiar definido, efeitos não escritos.</td></tr>
+<tr><td class="nm">Atos II e III</td><td>A run é 1 Ato de 8 combates + Chefe I.</td></tr>
+<tr><td class="nm">A Muda (evolução)</td><td>Código pronto e testado; dorme por falta de espécies com <code>evolves_to</code>.</td></tr>
+<tr><td class="nm">Meta-progressão entre runs</td><td>Não existe. O Éter não sobrevive à run.</td></tr>
+</table></div>
+
+<h3>Duas perguntas que o protótipo levanta</h3>
+<ul>
+  <li><b>O Sheep aparece em toda dupla inicial vencedora.</b> Guardião é a âncora natural. Se duplas sem tanque devem ser viáveis, o botão é o <i>kite</i> dos Arcanos — fugir melhor compensaria não ter muralha.</li>
+  <li><b>O Curandeiro causa 0% do dano</b>, e o log de combate o denuncia por isso. Vale decidir se o Coalla deveria ter dano base, ou se o log deveria reconhecer cura como contribuição.</li>
+</ul>
+
+<p class="foot">PRISMA · GDD v0.2 · 31/08/2026. Reconciliado com o build a partir de <code>data/*.json</code> e das medições de <code>tools/autoplay.tscn</code> e <code>tools/clinch_probe.tscn</code>. As decisões de design citadas são do Arthur (ACTSAN) e do João; o histórico completo das mudanças está em <code>NOTAS.md</code> §5.</p>
+
+</div>
+
+</body>
+</html>

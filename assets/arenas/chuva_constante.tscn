@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/cenario_fade.gdshader" id="sh"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/01_ceu.png" id="t1"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/03_nuvens.png" id="t2"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/04_montanha_funda.png" id="t3"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/05_montanha_meio.png" id="t4"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/06_montanha_perto.png" id="t5"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/08_pedras.png" id="t6"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/10_poca_1.png" id="t7"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/10_poca_2.png" id="t8"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/10_poca_3.png" id="t9"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/10_poca_4.png" id="t10"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/chuva_constante/10_poca_5.png" id="t11"]
+
+[sub_resource type="ShaderMaterial" id="mat"]
+shader = ExtResource("sh")
+shader_parameter/origem = Vector2(0, 0)
+shader_parameter/tamanho = Vector2(1280, 260)
+shader_parameter/topo_fim = 0.3692
+shader_parameter/horizonte = 0.6538
+shader_parameter/rodape_fim = 0.9077
+shader_parameter/lateral = 0.1641
+
+[node name="Cenario" type="Node2D"]
+
+[node name="01 ceu" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 130)
+texture = ExtResource("t1")
+
+[node name="03 nuvens" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(611, 22)
+texture = ExtResource("t2")
+
+[node name="04 montanha funda" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 136)
+texture = ExtResource("t3")
+
+[node name="05 montanha meio" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 155)
+texture = ExtResource("t4")
+
+[node name="06 montanha perto" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 179)
+texture = ExtResource("t5")
+
+[node name="08 pedras" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 250)
+texture = ExtResource("t6")
+
+[node name="10 poca 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(115, 186)
+texture = ExtResource("t7")
+
+[node name="10 poca 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(342, 186)
+texture = ExtResource("t8")
+
+[node name="10 poca 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(585, 186)
+texture = ExtResource("t9")
+
+[node name="10 poca 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(808, 186)
+texture = ExtResource("t10")
+
+[node name="10 poca 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1060, 186)
+texture = ExtResource("t11")

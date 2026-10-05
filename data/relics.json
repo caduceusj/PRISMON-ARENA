@@ -1,0 +1,91 @@
+{
+  "_doc": "PRISMA GDD §13 — Relíquias reescrevem uma regra, não somam um número. Vertical Slice: 8 (§24.1).",
+  "relics": [
+    {
+      "id": "coracao_instavel",
+      "name": "Coração Instável",
+      "kind": "reacao",
+      "text": "Reações causam +30% de dano, mas metade de toda aura que você aplica num inimigo respinga em quem a aplicou.",
+      "mods": {
+        "reaction_dmg_add": 0.3,
+        "enemy_aura_backlash": 0.5
+      }
+    },
+    {
+      "id": "cadinho",
+      "name": "Cadinho",
+      "kind": "reacao",
+      "text": "Reações Amplificadoras não consomem a aura do alvo. Uma vez a cada 3 s por alvo.",
+      "mods": {
+        "amplify_keeps_aura_cd": 3.0
+      }
+    },
+    {
+      "id": "lente_fratal",
+      "name": "Lente Fratal",
+      "kind": "reacao",
+      "text": "Toda reação tem 15% de chance de disparar uma segunda reação aleatória válida.",
+      "mods": {
+        "second_reaction_chance": 0.15
+      }
+    },
+    {
+      "id": "mao_alquimista",
+      "name": "Mão do Alquimista",
+      "kind": "reacao",
+      "text": "Toda unidade aplica +1 UA. Simples e transformador.",
+      "mods": {
+        "team_ua_add": 1.0
+      }
+    },
+    {
+      "id": "pedra_ordem",
+      "name": "Pedra da Ordem",
+      "kind": "reacao",
+      "text": "Reações reversas (ordem 'errada') passam a ter o multiplicador cheio.",
+      "mods": {
+        "reverse_full_mult": 1.0
+      }
+    },
+    {
+      "id": "elo_extra",
+      "name": "Elo Extra",
+      "kind": "vinculo",
+      "text": "+2 de Vínculo.",
+      "mods": {
+        "bond_add": 2.0
+      }
+    },
+    {
+      "id": "vidro_ativo",
+      "name": "Vidro Ativo",
+      "kind": "risco",
+      "text": "Energia do Domador acumula 2× mais rápido; sua equipe tem -30% de HP máx.",
+      "mods": {
+        "energy_mult": 2.0,
+        "team_hp_mult": 0.7
+      }
+    },
+    {
+      "id": "ampulheta_quebrada",
+      "name": "Ampulheta Quebrada",
+      "kind": "risco",
+      "text": "Combates duram 25 s em vez de 45 s. Recompensas +50%.",
+      "mods": {
+        "combat_duration": 25.0,
+        "reward_mult": 1.5
+      }
+    },
+    {
+      "id": "estomago_de_ferro",
+      "name": "Estômago de Ferro",
+      "kind": "comida",
+      "text": "+2 de Estômago para todas as unidades.",
+      "mods": {
+        "estomago_add": 2.0
+      }
+    }
+  ],
+  "_livro_de_receitas": "APAGADA em 15/09. 'Pratos podem ser cozinhados em qualquer no, nao so em Banquetes' — e o no de Banquete deixou de existir em 31/08, quando a Feira foi partida em loja e cozinha. A chave cook_anywhere so era lida por RunState.can_cook_anywhere(), que nenhuma tela chamava: a reliquia ocupava uma vaga do sorteio e nao fazia nada. Apagada em vez de implementada porque a regra que ela reescrevia nao existe mais.",
+  "_backlash": "enemy_aura_backlash e uma FRACAO da UA aplicada, nao um liga-desliga (era 1.0 e ninguem lia). O Coracao Instavel era puro bonus: +30% em TODA reacao, sem custo. Agora a aura que a sua unidade joga no inimigo volta pela metade para ela — o que arma reacao para o outro lado tambem, que e exatamente o que o texto promete. 0.5 e o ponto em que a reliquia continua valendo a pena numa build de reacao e vira armadilha numa equipe que so bate."
+}

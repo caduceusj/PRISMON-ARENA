@@ -1,0 +1,250 @@
+{
+  "_doc": "PRISMA — Eventos de acaso (revisão 31/08, decisão do autor: 'eventos aleatórios que o jogador pode escolher ser incluído ou não'). O jogo decide QUE evento apareceu; o jogador decide se ENTRA. Recusar nunca custa nada — o preço de recusar é a chance perdida. Cada evento tem desfechos com peso; os pesos de cada evento somam 1.0.",
+  "_ops": "ether:n | heal:pct | damage:pct | item | relic | dish_free",
+  "events": [
+    {
+      "id": "veio_de_eter",
+      "title": "Veio de Éter",
+      "text": "Uma fenda no chão pulsa com Éter bruto. Cavar leva tempo e as criaturas voltam arranhadas — mas o veio é generoso.",
+      "accept_label": "CAVAR",
+      "decline_label": "SEGUIR EM FRENTE",
+      "outcomes": [
+        {
+          "weight": 0.7,
+          "good": true,
+          "text": "O veio rende bem.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 14
+            },
+            {
+              "op": "perde_equipado",
+              "so_prato": true
+            }
+          ]
+        },
+        {
+          "weight": 0.3,
+          "good": false,
+          "text": "A fenda desmorona.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 4
+            },
+            {
+              "op": "perde_equipado",
+              "so_prato": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fonte_termal",
+      "title": "Fonte Termal",
+      "text": "Água fumegante brota entre as pedras. Mergulhar restaura — se a temperatura colaborar.",
+      "accept_label": "MERGULHAR",
+      "decline_label": "NÃO ARRISCAR",
+      "outcomes": [
+        {
+          "weight": 0.75,
+          "good": true,
+          "text": "A equipe sai inteira.",
+          "ops": [
+            {
+              "op": "heal",
+              "pct": 0.55
+            }
+          ]
+        },
+        {
+          "weight": 0.25,
+          "good": false,
+          "text": "A água ferve sem aviso.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 6
+            },
+            {
+              "op": "perde_equipado",
+              "so_prato": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caravana_perdida",
+      "title": "Caravana Perdida",
+      "text": "Um domador ferido pede escolta até a próxima arena. Custa uma volta a mais no caminho.",
+      "accept_label": "ESCOLTAR",
+      "decline_label": "RECUSAR",
+      "outcomes": [
+        {
+          "weight": 0.6,
+          "good": true,
+          "text": "Ele paga com o que carrega.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 8
+            },
+            {
+              "op": "item"
+            }
+          ]
+        },
+        {
+          "weight": 0.4,
+          "good": true,
+          "text": "Ele só tem gratidão — e comida.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "altar_rachado",
+      "title": "Altar Rachado",
+      "text": "Um altar antigo guarda algo sob a pedra. Quebrá-lo desperta o que estiver dentro.",
+      "accept_label": "QUEBRAR O ALTAR",
+      "decline_label": "DEIXAR INTACTO",
+      "outcomes": [
+        {
+          "weight": 0.45,
+          "good": true,
+          "text": "Uma relíquia dormia ali.",
+          "ops": [
+            {
+              "op": "relic"
+            }
+          ]
+        },
+        {
+          "weight": 0.3,
+          "good": true,
+          "text": "Só pó de Éter — mas bastante.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 18
+            }
+          ]
+        },
+        {
+          "weight": 0.25,
+          "good": false,
+          "text": "O altar cobra o preço.",
+          "ops": [
+            {
+              "op": "perde_equipado",
+              "so_prato": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pomar_selvagem",
+      "title": "Pomar Selvagem",
+      "text": "Frutas de todos os elementos pendem baixo. Colher demora, e algo já está comendo.",
+      "accept_label": "COLHER",
+      "decline_label": "PASSAR DIRETO",
+      "outcomes": [
+        {
+          "weight": 0.65,
+          "good": true,
+          "text": "A colheita vira Éter na bolsa.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 16
+            }
+          ]
+        },
+        {
+          "weight": 0.35,
+          "good": false,
+          "text": "O dono do pomar aparece.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 8
+            },
+            {
+              "op": "perde_equipado",
+              "so_prato": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cozinheiro_errante",
+      "title": "Cozinheiro Errante",
+      "text": "Uma panela ferve à beira do caminho. O cozinheiro serve de graça a quem prová-la primeiro.",
+      "accept_label": "PROVAR",
+      "decline_label": "AGRADECER E SEGUIR",
+      "outcomes": [
+        {
+          "weight": 0.8,
+          "good": true,
+          "text": "O prato é excelente.",
+          "ops": [
+            {
+              "op": "dish_free"
+            }
+          ]
+        },
+        {
+          "weight": 0.2,
+          "good": false,
+          "text": "Estava estragado.",
+          "ops": [
+            {
+              "op": "perde_equipado",
+              "so_prato": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ninho_abandonado",
+      "title": "Ninho Abandonado",
+      "text": "Cascas vazias e algo brilhando no fundo. Vasculhar significa enfiar a mão onde não se enxerga.",
+      "accept_label": "VASCULHAR",
+      "decline_label": "DEIXAR QUIETO",
+      "outcomes": [
+        {
+          "weight": 0.55,
+          "good": true,
+          "text": "Um item esquecido.",
+          "ops": [
+            {
+              "op": "item"
+            }
+          ]
+        },
+        {
+          "weight": 0.45,
+          "good": true,
+          "text": "Cascas de Éter cristalizado.",
+          "ops": [
+            {
+              "op": "ether",
+              "n": 11
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

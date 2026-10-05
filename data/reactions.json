@@ -1,0 +1,268 @@
+{
+  "_doc": "PRISMA GDD §6 — a matriz de reações. Revisão 31/08: cada reação ganhou um `text` que diz o que ela FAZ, para a tela de Sinergias poder explicá-la. Antes esse conhecimento só existia no código e no GDD.",
+  "_legend": "kind: amplify (multiplica o golpe) | transform (dano próprio via PE) | catalytic (não faz dano)",
+  "reactions": [
+    {
+      "id": "DERRETIMENTO",
+      "name": "Derretimento",
+      "kind": "amplify",
+      "color": "#ff7a3a",
+      "screen_flash": 0.55,
+      "hitstop": 0.06,
+      "mult_forward": 2.0,
+      "mult_reverse": 1.5,
+      "consume": "all",
+      "text": "O golpe inteiro dobra de força. A aura é consumida por completo — é a reação mais cara e a que mais dói."
+    },
+    {
+      "id": "VAPORIZAR",
+      "name": "Vaporizar",
+      "kind": "amplify",
+      "color": "#8fd8ff",
+      "screen_flash": 0.4,
+      "hitstop": 0.05,
+      "mult_forward": 1.5,
+      "mult_reverse": 1.25,
+      "consume": "all",
+      "on_react": [
+        {
+          "op": "debuff",
+          "target": "enemies_near_target",
+          "radius": 130.0,
+          "stat": "ult_gain",
+          "mult": 0.8,
+          "duration": 3.0,
+          "label": "Névoa"
+        }
+      ],
+      "text": "Amplia o golpe e espalha Névoa: quem estiver perto do alvo carrega a ultimate mais devagar."
+    },
+    {
+      "id": "DETONACAO",
+      "name": "Detonação",
+      "kind": "transform",
+      "color": "#ffb03a",
+      "screen_flash": 0.35,
+      "hitstop": 0.04,
+      "damage_mult": 1.5,
+      "damage_element": "FOGO",
+      "radius": 140.0,
+      "consume": "transform",
+      "on_react": [
+        {
+          "op": "delay_action",
+          "target": "reaction_target",
+          "fraction": 0.5,
+          "label": "Empurrão"
+        }
+      ],
+      "text": "Explode em área de 140. Atinge quem estiver perto do alvo, não só ele."
+    },
+    {
+      "id": "ELETROCUSSAO",
+      "name": "Eletrocussão",
+      "kind": "transform",
+      "color": "#ffe36a",
+      "screen_flash": 0.3,
+      "hitstop": 0.03,
+      "damage_mult": 1.0,
+      "damage_element": "RAIO",
+      "radius": 0.0,
+      "consume": "none",
+      "_consume_note": "GDD §6.4 — Eletrocussão NÃO consome Encharcado.",
+      "on_react": [
+        {
+          "op": "chain",
+          "count": 2,
+          "require_aura": "ENCHARCADO",
+          "damage_mult": 1.0
+        }
+      ],
+      "text": "NÃO consome a aura. É a única que encadeia: enquanto houver Encharcado, cada golpe de Raio dispara de novo."
+    },
+    {
+      "id": "SUPERCONDUCAO",
+      "name": "Supercondução",
+      "kind": "transform",
+      "color": "#c9a8ff",
+      "screen_flash": 0.3,
+      "hitstop": 0.03,
+      "damage_mult": 0.8,
+      "damage_element": "RAIO",
+      "radius": 120.0,
+      "consume": "transform",
+      "on_react": [
+        {
+          "op": "debuff",
+          "target": "reaction_target",
+          "stat": "def",
+          "mult": 0.75,
+          "duration": 8.0,
+          "max_stacks": 2,
+          "label": "Supercondução"
+        }
+      ],
+      "text": "Explode em área e afina a DEF dos atingidos. Prepara o terreno para o resto da equipe."
+    },
+    {
+      "id": "CONGELAR",
+      "name": "Congelar",
+      "kind": "catalytic",
+      "color": "#a8f0ff",
+      "screen_flash": 0.45,
+      "hitstop": 0.05,
+      "consume": "transform",
+      "on_react": [
+        {
+          "op": "control",
+          "target": "reaction_target",
+          "control": "freeze",
+          "duration": 1.5,
+          "immunity": 5.0,
+          "label": "Congelado"
+        }
+      ],
+      "text": "Trava o alvo no lugar. A duração cai com a Vontade dele, e não pega quem está imune a Controle."
+    },
+    {
+      "id": "CATALISACAO",
+      "name": "Catalisação",
+      "kind": "transform",
+      "color": "#8fe86a",
+      "screen_flash": 0.3,
+      "hitstop": 0.03,
+      "damage_mult": 0.7,
+      "damage_element": "RAIO",
+      "radius": 0.0,
+      "consume": "transform",
+      "_note": "GDD §6.4 — devolve 8 de Energia do Domador: a principal fonte de Ativos.",
+      "on_react": [
+        {
+          "op": "energy",
+          "amount": 8.0
+        }
+      ],
+      "text": "Devolve 8 de Energia ao Domador. É o motor dos Ativos: uma equipe de Raio e Natureza lança muito mais."
+    },
+    {
+      "id": "GEADA_MORTAL",
+      "name": "Geada Mortal",
+      "kind": "transform",
+      "color": "#bff0d8",
+      "screen_flash": 0.35,
+      "hitstop": 0.04,
+      "damage_mult": 1.2,
+      "damage_element": "GELO",
+      "radius": 0.0,
+      "consume": "transform",
+      "_note": "GDD §6.4 — anti-tanque: o único dano percentual do jogo.",
+      "on_react": [
+        {
+          "op": "maxhp_damage",
+          "target": "reaction_target",
+          "pct": 0.04
+        }
+      ],
+      "text": "Arranca 4% do HP MÁXIMO do alvo, além do dano. Quanto mais gordo o inimigo, mais dói."
+    }
+  ],
+  "_matrix_doc": "aura presente no alvo + elemento do golpe recebido -> reação. 'forward' = ordem de maior multiplicador.",
+  "matrix": [
+    {
+      "aura": "COMBUSTAO",
+      "hit": "GELO",
+      "reaction": "DERRETIMENTO",
+      "direction": "reverse"
+    },
+    {
+      "aura": "COMBUSTAO",
+      "hit": "AGUA",
+      "reaction": "VAPORIZAR",
+      "direction": "reverse"
+    },
+    {
+      "aura": "COMBUSTAO",
+      "hit": "RAIO",
+      "reaction": "DETONACAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "GELIDO",
+      "hit": "FOGO",
+      "reaction": "DERRETIMENTO",
+      "direction": "forward"
+    },
+    {
+      "aura": "GELIDO",
+      "hit": "AGUA",
+      "reaction": "CONGELAR",
+      "direction": "forward"
+    },
+    {
+      "aura": "GELIDO",
+      "hit": "RAIO",
+      "reaction": "SUPERCONDUCAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "ENCHARCADO",
+      "hit": "FOGO",
+      "reaction": "VAPORIZAR",
+      "direction": "forward"
+    },
+    {
+      "aura": "ENCHARCADO",
+      "hit": "GELO",
+      "reaction": "CONGELAR",
+      "direction": "forward"
+    },
+    {
+      "aura": "ENCHARCADO",
+      "hit": "RAIO",
+      "reaction": "ELETROCUSSAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "CARGA",
+      "hit": "FOGO",
+      "reaction": "DETONACAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "CARGA",
+      "hit": "GELO",
+      "reaction": "SUPERCONDUCAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "CARGA",
+      "hit": "AGUA",
+      "reaction": "ELETROCUSSAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "ESPORO",
+      "hit": "RAIO",
+      "reaction": "CATALISACAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "CARGA",
+      "hit": "NATUREZA",
+      "reaction": "CATALISACAO",
+      "direction": "forward"
+    },
+    {
+      "aura": "ESPORO",
+      "hit": "GELO",
+      "reaction": "GEADA_MORTAL",
+      "direction": "forward"
+    },
+    {
+      "aura": "GELIDO",
+      "hit": "NATUREZA",
+      "reaction": "GEADA_MORTAL",
+      "direction": "forward"
+    }
+  ]
+}

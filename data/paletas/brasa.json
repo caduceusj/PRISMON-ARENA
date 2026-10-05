@@ -1,0 +1,56 @@
+{
+  "_doc": "PROPOSTA de paleta. Todo arquivo .json desta pasta e lido e juntado a data/paleta.json — para instalar uma paleta nova, largue um arquivo aqui; para ativa-la, escreva o nome dela em `ativa` la. Um nome repetido aqui SOBREPOE o de la, que e como se muda a paleta do jogo sem editar o arquivo do jogo.",
+  "paletas": {
+    "brasa": {
+      "nome": "A Brasa",
+      "nota": "PROPOSTA. BRASA -- a mesa depois da briga, ainda morna. Vinho e carvao: os quatro degraus tem vies magenta-quente (matiz 306 / 311 / 317) e a aresta e ameixa clara (293), o passo mais largo do ultimo degrau entre as paletas instaladas (1,642 contra 1,317 do vidro). O acento e a unica coisa VERDADEIRAMENTE quente do quadro: brasa #ff9a21, a 23 graus de matiz do FOGO. QUEM CEDEU NA BRIGA DO FUNDO QUENTE: o `ruim`. Ele saiu de #e0576a (matiz 352, a 18 graus do FOGO) para #f03c86 (matiz 335, a 34 graus) -- cede o `ruim` e nao o FOGO porque a cor do elemento e CONTEUDO (data/elements.json) e vale para TODAS as paletas: uma paleta nao pode redefinir a identidade de um elemento. Contraste: forte 14,28:1, fraco 5,74:1; degraus 1,130 / 1,123 / 1,642. Elementos contra a lajota: Fogo 4,75:1, Agua 4,31:1, Natureza 6,90:1, Raio 10,17:1, Gelo 10,18:1 -- todos iguais ou acima do vidro. As 16 salas sao a resposta a 'cores diferentes por tela': o par mais parecido esta a 9,6 graus de matiz (no vidro tres salas sao o MESMO hex, a 0,0 grau), e preparacao / sinergias / combate, identicas no vidro, aqui sao orquidea 284, ciano 189 e vinho 346.",
+      "materia": {
+        "mesa": "#150a14",
+        "lajota": "#2a1426",
+        "lajota_hi": "#381c30",
+        "aresta": "#5e3a63"
+      },
+      "materia_aux": {
+        "recuo": "#0a050a",
+        "aresta_hi": "#7d5182"
+      },
+      "recipiente": {
+        "fundo": "#150a14",
+        "painel": "#20101e",
+        "painel_hi": "#2a1628",
+        "linha": "#46293f"
+      },
+      "texto": {
+        "forte": "#f4e7ee",
+        "fraco": "#a88ea0"
+      },
+      "estado": {
+        "bom": "#4fd39b",
+        "ruim": "#f03c86",
+        "aviso": "#f0781d",
+        "ouro": "#f7dda0",
+        "acento": "#ff9a21"
+      },
+      "salas": {
+        "titulo": "#b03f80",
+        "iniciais": "#5fa84e",
+        "escolha": "#4a68d8",
+        "preparacao": "#9a5fb0",
+        "sinergias": "#2fa8bc",
+        "combate": "#c0405e",
+        "vitoria": "#3fb488",
+        "derrota": "#7f6e90",
+        "recruta": "#3f8ed8",
+        "loja": "#e8a83a",
+        "cozinha": "#e8722e",
+        "poder": "#7a5ae8",
+        "acaso": "#cf52b0",
+        "troca": "#97a63f",
+        "chefe": "#d24a2e",
+        "fim_vitoria": "#e8c84e"
+      },
+      "sala_forca": 0.16,
+      "sala_na_materia": 0.32
+    }
+  }
+}

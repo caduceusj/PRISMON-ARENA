@@ -1,0 +1,259 @@
+{
+  "_doc": "PRISMA — todas as constantes de balanceamento. GDD §17.3 (fórmulas), §14.6 (escalada), §12 (comida), §10.5 (Vínculo).",
+  "combat": {
+    "max_duration": 45.0,
+    "energy_per_second": 1.6,
+    "energy_per_reaction": 1.0,
+    "energy_per_ally_death": 5.0,
+    "energy_max": 100.0,
+    "ultimate_max": 100.0,
+    "ultimate_per_attack": 10.0,
+    "ultimate_per_hit_taken": 5.0,
+    "crit_base": 0.0,
+    "crit_multiplier": 1.5,
+    "aura_cap_ua": 8.0,
+    "max_auras": 2,
+    "transform_consume_ua": 2.0,
+    "will_control_divisor": 150.0,
+    "control_immunity": 5.0,
+    "reaction_base_a": 30.0,
+    "reaction_base_b": 14.0,
+    "pe_soft_cap": 120.0,
+    "elemental_damage_scale": 0.6,
+    "heal_pe_divisor": 150.0,
+    "shield_pe_scale": 0.4,
+    "resist_cap": 0.75,
+    "_hp_scale_doc": "AJUSTE DE RITMO. Com as estatísticas do GDD §18 literais e SEM deslocamento, a mediana de combate ficava em ~9 s (alvo §17.4: 28 s) e a Energia do Domador não acumulava para 1 Ativo sequer. O deslocamento na arena resolveu boa parte disso sozinho — a fase de aproximação vale ~5 s por combate — e permitiu baixar este escalar de 2.0 para 1.4. Ele multiplica o HP máximo DOS DOIS LADOS, preservando todas as razões entre espécies, elementos e reações; a única distorção é que fontes de dano FIXAS (Combustão 4/s, DanoBase de reação, escudos) ficam relativamente mais fracas na mesma proporção. Ver NOTAS.md §1.1.",
+    "hp_scale": 3.7,
+    "lane_base": 150.0,
+    "lane_gap": 90.0,
+    "unit_gap": 112.0,
+    "_layout_doc": "A faixa mais funda nasce em lane_base + 2*lane_gap. Com 205+310=515 contra um raio de arena de 530, a Retaguarda nascia COLADA na borda e a briga inteira acontecia na beirada, com os corpos e as barras de vida empilhados. Agora a faixa mais funda cai em 150+180=330, ~62% do raio: o encontro acontece no meio da elipse, que e onde a camera olha.",
+    "_energia": "Revisao 15/09: energy_per_second CAIU de 2.6 para 1.6 porque energy_start=20 e o portao de Energia por reacao (que passou a valer para a reacao causada pelo proprio Ativo) empurraram Ativos por combate de 2.21 para 3.04 — acima do alvo 1.5-2.5 do GDD 17.4. Medido em 1000 runs a cada ponto. O total de Energia por briga e quase o mesmo; o que mudou foi a DISTRIBUICAO: 20 na largada em vez de 20 pingados ao longo de uma luta de mediana 13 s. E essa a decisao — a agencia do jogador existir desde o comeco, e nao a media subir. Resultado final: 2.49 Ativos por combate. (Historico 03/09: 2.0 -> 2.6 porque arenas e modificadores encurtaram a briga.)",
+    "_cadeia": "Teto de PROFUNDIDADE da cadeia de reacoes. A Eletrocussao nao consome a aura (GDD 6.4) e o op 'chain' chama strike de volta, entao reacao -> golpe -> reacao e um ciclo. Ate 03/09 ele terminava por acidente: as auras acabavam. Quando as arenas passaram a encharcar o campo inteiro de forma continua, a recursao deixou de ter fim e o jogo estourou a pilha. O teto fecha o ciclo por construcao, nao por sorte de recurso.",
+    "max_reaction_chain": 3,
+    "boss_duration": 90.0,
+    "_boss_duration_doc": "Teto de tempo da briga de chefe. Os 45 s comuns existem para uma briga de passagem nao arrastar; o chefe tem varias vezes a ficha de uma criatura comum e batia no relogio quase sempre. Estourar nao e empate — vence quem tem mais % de HP, e com o HP do Devorador isso e sempre ele: o jogador perdia para um cronometro sem ver o chefe cair.",
+    "heal_falloff_from": 24.0,
+    "heal_falloff_rate": 0.03,
+    "heal_falloff_floor": 0.15,
+    "_heal_falloff_doc": "A cura perde forca depois de heal_falloff_from segundos, caindo heal_falloff_rate por segundo ate o piso. Medido: sem isto o empate mais comum do jogo era Arcano/Curandeiro x Curandeiro — um curandeiro que cura mais do que apanha nunca morre e a briga acaba no relogio. A calibragem e um compromisso: aos 18 s e 0.045/s a forma dominante do impasse cai pela metade, mas a vitoria desce a 33% porque o curandeiro do JOGADOR tambem apanha; aos 30 s e 0.025/s a vitoria fica em 36% e os impasses caem ~20%. O numero de empates muda pouco — o que sai da mesa e o caso extremo do curandeiro imortal. | 15/09: com support_heal_scale a fadiga teve de morder mais cedo — 30 s / 0.025 -> 24 s / 0.030. O caso extremo que ela existe para matar (curandeiro que cura mais do que apanha) volta na mesma proporcao em que a cura sobe.",
+    "_energy_start_doc": "A MAO DO DOMADOR NAO CHEGA VAZIA (15/09, decisao do autor). Medido em 1000 runs antes da mudanca: 15% dos combates nao ofereciam UM Ativo sequer, e no passo 2 eram 52%; a mediana do primeiro Ativo disponivel era 5,8 s numa briga de mediana 12,6 s. Com 2,6 Energia/s o orcamento da briga inteira mal paga um lancamento, e ele chega depois de a briga estar decidida. energy_start=20 adianta ~7,7 s de acumulo e nao toca em hp_scale — que e o botao que move a vitoria em 23 pontos percentuais e levaria a mediana junto.",
+    "energy_start": 20.0,
+    "_active_pe_doc": "PE DE REFERENCIA DA MAO DO DOMADOR. cast_active roda com source=null e o combate inteiro le src.eff_pe(): o Ativo do jogador entrava com PE 0 na curva do GDD 6.1, que vale ate 2x no dano de reacao. O Domador nao tem ficha, entao toma emprestada a da equipe VIVA. 'media' foi escolhida sobre 'soma' porque soma faria o Ativo escalar com o TAMANHO da equipe (2 corpos no passo 1, 5 no 8) e nao com o investimento em PE — o proprio eixo que a Ressonancia e os itens de PE existem para premiar.",
+    "active_pe_mode": "media",
+    "active_pe_mult": 1.0,
+    "support_heal_scale": 1.8,
+    "support_heal_threshold": 0.9,
+    "_mortos": "APAGADOS em 15/09, todos com zero ocorrencias em .gd: combat.tick (o passo da simulacao e estrutural, nao balanceamento — vive em CombatSim.TICK e mudar de arquivo nao o tornaria ajustavel), combat.field_width (a arena e uma elipse desde 31/08 e as medidas dela vivem em movement.arena_half_*), movement.retarget_hysteresis (a troca de alvo e por tempo, movement.retarget_interval, nao por distancia) e difficulty.enemy_will_bonus (0.0, nunca somado a Vontade de ninguem).",
+    "_support_heal_doc": "A CURA DE SUPORTE NAO ACOMPANHAVA O hp_scale (15/09). A cura do Curandeiro e ATK * (1 + PE/heal_pe_divisor), e ATK nao e multiplicado por hp_scale — o HP e. Com hp_scale em 3.7, a mesma distorcao que o _hp_scale_doc reconhece para Combustao e DanoBase valia para o unico Papel cujo trabalho inteiro e recompor HP: a Coalla (ATK 20, o menor do elenco) devolvia ~30 HP por acao contra pocos de 1500-2900. Medido, 400 runs por ponto, com todo o resto igual: escala 1.0 -> vitoria 38,0% e coalla 30,0%; 2.0 -> 43,3%, coalla 36,9% e ESTOURO 6,3% (fora do alvo <6%, porque curandeiro dos dois lados alonga a briga); 1.8 -> 37,8%, coalla 34,4% e estouro 5,7%. 1.8 e o ponto em que o Curandeiro volta a valer sem o relogio pagar a conta. Vale para os dois lados, como toda constante de combate."
+  },
+  "movement": {
+    "_doc": "As unidades se DESLOCAM pela arena enquanto lutam. A formação inicial continua sendo a do §7.2 (três faixas por Postura, VEL decrescente) — ela é o que a tela de preparação promete. O que se move é o combate, não a decisão: o jogador continua sem posicionar ninguém.",
+    "_alcance": "range = distância em que a unidade consegue atacar. kite = distância que ela TENTA manter (0 = corpo a corpo, entra até encostar).",
+    "_escala_doc": "REGRA DURA: alcance de corpo a corpo > separation_radius + ~12px. Se a separação empurrar além do alcance, a unidade trava num deadlock sem nunca bater (aconteceu com a Lâmina em 68 vs separação 70).",
+    "arena_half_width": 530.0,
+    "arena_half_height": 235.0,
+    "separation_radius": 64.0,
+    "separation_push": 150.0,
+    "arrive_slack": 10.0,
+    "melee_hold": 0.9,
+    "retarget_interval": 0.5,
+    "gelido_move_slow": 0.0,
+    "roles": {
+      "Guardiao": {
+        "range": 76.0,
+        "move_speed": 96.0,
+        "kite": 0.0
+      },
+      "Lamina": {
+        "range": 72.0,
+        "move_speed": 148.0,
+        "kite": 0.0
+      },
+      "Arcano": {
+        "range": 265.0,
+        "move_speed": 78.0,
+        "kite": 225.0
+      },
+      "Curandeiro": {
+        "range": 305.0,
+        "move_speed": 84.0,
+        "kite": 275.0
+      },
+      "Catalisador": {
+        "range": 235.0,
+        "move_speed": 88.0,
+        "kite": 185.0
+      },
+      "Invocador": {
+        "range": 245.0,
+        "move_speed": 80.0,
+        "kite": 205.0
+      }
+    },
+    "boss_scale": 1.35,
+    "separation_clinch_scale": 0.3,
+    "leash_reach": 0.9,
+    "_leash_doc": "Trava de alcance (revisao 31/08): a separacao NUNCA pode empurrar uma unidade para fora do alcance do proprio alvo. Depois de separar, quem tem alvo e puxado de volta para leash_reach * alcance. Sem isso os corpos se travavam: a unidade entrava no alcance, era empurrada para fora pelo aliado, voltava, era empurrada de novo — e nunca batia. Quem ja esta no alcance tambem recebe so separation_clinch_scale do empurrao, para o clinch parar de tremer.",
+    "separation_settle": 0.5,
+    "_separation_settle_doc": "Revisao 04/09. Fracao do raio de separacao ACIMA da qual duas criaturas que ja podem bater param de se empurrar; 1.0 = nunca param (como era antes). Medido: sem a zona morta, uma criatura de corpo a corpo passava 83% do tempo em que ja estava no alcance ainda se mexendo, 32% dela a mais de metade da velocidade — a separacao afastava, a coleira puxava de volta, e o combate lia como vibracao. A troca e sobreposicao de corpos: 1.0 -> 83% de remexida e 4.6% de pares encavalados; 0.5 -> 52% e 7.5%; 0.0 -> 33% e 12.7%. 0.5 tira mais de um terco da remexida encavalando quase nada."
+  },
+  "run": {
+    "nodes_per_act": 8,
+    "start_ether": 10,
+    "start_bond": 6,
+    "bond_milestone_node": 5,
+    "bond_milestone_value": 8,
+    "bond_hard_cap": 14,
+    "field_cap": 8,
+    "ether_min": 13,
+    "ether_max": 22,
+    "max_relics": 12,
+    "start_actives": [
+      "meteoro"
+    ],
+    "max_actives": 3,
+    "_actives": "Revisao 03/09 (autor): a Mao do Domador COMECA com um poder so — o Meteoro — e os outros dois se ganham no momento de Poder, que tem lugar fixo na sequencia. Antes a run comecava com os tres, entao a unica agencia do jogador dentro do combate ja vinha pronta e nunca crescia.",
+    "_mortos": "APAGADOS em 15/09 porque nenhum .gd os citava: 'acts' (1) — o slice tem um Ato so e quem decide o fim da trilha e nodes_per_act — e 'start_team_size' (2), que a tela de iniciais nunca consultou (ScreenStarter pede a dupla, e _roll_starting_team monta Arcano + Guardiao por Papel, nao por contagem). O bloco 'prices' inteiro saiu pelo mesmo motivo: os precos da Feira vivem em momentos.loja.preco_por_raridade, que e o unico que EventGen le.",
+    "_heal_doc": "CURA ENTRE NOS, em fracao do HP maximo. A chave existia desde 02/09 e RunState.heal_between_nodes curava 100% incondicionalmente, ignorando-a. Agora ela vale (hp_ratio = min(1, hp_ratio + pct)) e o dano ATRAVESSA os passos. | MEDIDO, 1000 runs por ponto, com todo o resto da configuracao final: 1.00 -> vitoria 40,0%; 0.35 -> 40,2%; 0.15 -> 40,3%. A chave deixou de ser morta e AINDA NAO E UMA ALAVANCA, e vale registrar por que: a mediana de combate e 13,1 s e o lado que vence quase nunca sai do campo machucado — 0.35 ja devolve tudo o que uma vitoria normal custou. O eixo de Risco so passa a cobrar de verdade quando a briga durar o que o GDD 17.4 pede (28 s), que e a mesma conversa do hp_scale. Ate la, o custo existe so nas runs que escapam por pouco — que sao poucas, e sao exatamente as que deveriam doer.",
+    "_cura_entre_nos": "NAO EXISTE chave de cura parcial entre nos, e isso e de proposito. A cura e TOTAL por decisao do autor (NOTAS 5.23, 02/09) — foi ela que derrubou os consumiveis, a Bolsa, o Descanso da Loja e o Ativo Improviso, porque com regeneracao total cura fora de combate nao tem funcao. Havia aqui um `heal_between_nodes_pct: 0.35` que NINGUEM lia; em 16/09 ele foi ligado por engano e depois removido. Se o custo entre nos tiver de voltar, ele nao volta como HP: volta como o que voce equipou (op `perde_equipado` do Acaso)."
+  },
+  "food": {
+    "_doc": "GDD §12.3 — Nutrição. O Estômago limita quantos bônus PERMANENTES uma unidade aceita. É o que transforma comida numa decisão de investimento em vez de um imposto.",
+    "estomago_base": 3,
+    "estomago_evolved": 4,
+    "refund_ratio": 0.5
+  },
+  "evolution": {
+    "copies_needed": 2,
+    "stat_mult": 2.2,
+    "bond_cost_base": 1,
+    "bond_cost_evolved": 2,
+    "item_slots_base": 3,
+    "item_slots_evolved": 4,
+    "weight_base": 1,
+    "weight_evolved": 2,
+    "_slots": "Revisao 03/09 (autor: 'os prismons podem stackar multiplos itens certo'). Era 1 slot na forma base — e como o elenco de teste NAO tem linha evolutiva, todo Prismon ficava preso em um item para a run inteira. Com 5 bichos, isso dava 5 itens no total contra ~6 ofertas da Feira: a loja passava a maior parte do tempo dizendo 'nenhum Prismon com espaco de item'.",
+    "_muda_doc": "A MUDA ESTA DORMENTE, NAO QUEBRADA (registrado em 15/09). Nenhuma especie de data/species.json tem 'evolves_to' — foi decisao do autor em 30/08 ('melhor pegar o pokemon inteiro'), e o elenco de teste sao 5 criaturas sem linha evolutiva. Logo copies_needed, stat_mult, bond_cost_evolved, item_slots_evolved e weight_evolved descrevem um ramo que nenhuma run percorre hoje. Ficam porque o codigo que os le (UnitInstance.copies_needed/try_evolve, EnemyGen.compose) e chamado pela tela de preparacao, e apaga-los quebraria src/ui/screen_prep.gd — nao porque estejam vivos. Quando uma especie ganhar evolves_to, a Muda volta inteira sem tocar em codigo."
+  },
+  "difficulty": {
+    "_doc": "GDD 14.6 — indice de poder do inimigo por passo. O GDD pede 1.00 -> 1.45 no Ato I; aqui a curva de PODER e mais rasa de proposito porque a contagem de CORPOS (enemy_count_by_node, 2 -> 5) carrega a maior parte da escalada. A dificuldade que o jogador sente e o produto dos dois, mais os modificadores de bando da reta final.",
+    "_count_doc": "CONTAGEM DE CORPOS POR PASSO, EXPLICITA (15/09). Era lerp(enemy_count_first=2, enemy_count_last=5) arredondado, o que dava 2,2,3,3,4,4,5,5. A equipe cresce 2,3,3,4,4,4,4,5 (dois iniciais + recrutas nos passos 1, 3 e 7), entao os passos 2 e 4 eram jogados com o jogador em VANTAGEM NUMERICA — e eram exatamente os dois picos da vitoria por no (100,0% e 99,5%), com os quatro primeiros passos carregando 0,8% das mortes. Metade da run que todo jogador ve toda vez nao tinha aposta. O array escreve a mao o dente de serra: 2,3,3,4,4,4,5,5 — o jogador nunca passa uma luta inteira com +1 corpo, e continua sem estar em minoria antes do passo 7.",
+    "_intro_doc": "Revisao 30/08 (autor): a introducao tem que comecar com vitorias e ESCALAR. O cardapio de temas e gradual (danger_max_by_node) — o passo 1 so oferece temas leves; do 6 em diante as duas opcoes sao pesadas (danger_min_by_node). | 15/09: power_first voltou de 0.62 para 0.68 junto com o array de contagem de corpos. Os quatro primeiros passos carregavam 0,8% das mortes; agora carregam 5,4%, e o passo 1 continua sendo vitoria praticamente certa (o smoke test cobra 10 de 12 sementes).",
+    "_power_last_doc": "O GDD 14.6 da 1.45 no fim do Ato I. Aqui e 0.92, e o numero so faz sentido junto do que mudou em volta. RECALIBRAGEM DE 15/09, medida em 400 runs por ponto (vitoria da run, com o resto da configuracao final): a economia apertada (ver momentos.loja._economia_doc) tirou ~2 itens por run das maos do jogador e derrubou a vitoria de 38,0% para 20,8% com power_last 1.05 / boss_power 4.5. Daí a escada: 0.80 / 3.0 -> 44,8%; 0.90 / 3.4 (power_first 0.72) -> 34,8%; 0.86 / 3.2 (power_first 0.68) -> 38,0%; 0.92 / 3.5 -> 42,3%; e 0.92 / 3.5 com support_heal_scale 1.8 -> 37,8%. Confirmado em 1000 runs: 40,2%. LICAO QUE SE REPETE: mexer na economia e mexer na dificuldade. O poder de compra do jogador e um eixo de poder tanto quanto a ficha do inimigo, e os dois se puxam. (Historico: era 1.85, caiu para 1.20 em 03/09 quando os modificadores de bando passaram a entrar so na reta final.)",
+    "power_first": 0.68,
+    "power_last": 0.92,
+    "boss_power": 3.5,
+    "_reta_final": "Revisao 03/09 (autor: 'so insira modificador assim na reta final, para o jogador escalar bem, ir em algumas lojas e ficar mais forte'). Ate o passo 5 a briga e limpa: o jogador recruta, aprende poderes e compra. Do 6 em diante entram os modificadores de bando e as arenas que mudam a regra; nos dois ultimos, dois modificadores. | 15/09: o passo 6 tambem deixou de ser um segundo momento de Poder e virou o Acaso, entao a reta final e onde a run para de crescer e comeca a cobrar.",
+    "reta_final_a_partir_de": 6,
+    "_boss_power_doc": "Multiplicador do chefe sobre a ficha dele em enemies.json — mesma formula de EnemyGen._unit_from. Antes de 04/09 NADA chegava ao chefe: build_boss lia a ficha e pronto, e boss_power so era consultado por NodeGen.power_for, que o no do chefe nem usa. | 15/09: caiu de 4.5 para 3.5. Com a economia apertada e a cura entre passos valendo, o Devorador passou a matar 55,6% de quem chegava nele (medido, 400 runs) — um chefe que mata mais da metade dos finalistas nao e clímax, e pedagio. Em 3.5 ele mata 34,2% (1000 runs) e continua sendo a maior fonte de derrota da run. Acima de 4.2 a briga estoura o relogio em vez de ficar mais dificil: a DEF dele ja e 52 contra os 10-20 de uma criatura comum, e multiplica-la faz o dano sumir.",
+    "enemy_count_by_node": [
+      2,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5
+    ]
+  },
+  "pair": {
+    "_doc": "A escolha de nó é sempre entre DOIS COMBATES (decisão do autor, 30/08/2026). O eixo é o Risco do GDD §14.4: a opção mais perigosa paga mais. Os arrays por nó controlam a escalada: no início só temas leves entram no sorteio.",
+    "reward_per_danger": 0.18,
+    "danger_max_by_node": [
+      2,
+      3,
+      3,
+      4,
+      4,
+      5,
+      5,
+      5
+    ],
+    "danger_min_by_node": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3
+    ]
+  },
+  "targets": {
+    "_doc": "GDD §17.4 — alvos de balanceamento que o simulador em lote (tools/) deve verificar.",
+    "median_combat_duration": 28.0,
+    "_median_tol_doc": "TOLERANCIA DE LEITURA da mediana, nao alvo de desenho: o GDD 17.4 fixa a mediana em 28 s e nao diz quanto pode variar. 0.21 reproduz a faixa 22-34 s que ficou escrita a mao em tools/autoplay.gd ate 15/09, e era o ULTIMO numero de julgamento em .gd num projeto cujo primeiro principio e que balanceamento nao mora em codigo. | 16/09: a mediana e a unica das cinco metricas fora do alvo (13,1 s medidos em 1000 runs) e o motivo esta medido no _duracao_x_reacoes_doc logo abaixo — os dois alvos do proprio 17.4 se contradizem na taxa de reacao que o jogo produz hoje.",
+    "median_combat_duration_tol": 0.21,
+    "_duracao_x_reacoes_doc": "OS DOIS ALVOS DO 17.4 SE CONTRADIZEM, E ISTO E MEDIDO (16/09). A duracao mediana e a UNICA metrica fora do alvo desde que o slice existe, e a explicacao que se dava era 'so hp_scale move isso e mexer nele move a vitoria'. Mexi. A mediana de 28 s E alcancavel so com dados: hp_scale 3.7 -> 7.9, max_duration 45 -> 96 (o mesmo fator, senao o relogio colhe o que a duracao plantou), energy_per_second 1.6 -> 0.6 e energy_per_reaction 1.0 -> 0.5. TABELA: [A] configuracao atual, 1000 runs -> mediana 13,1 s, vitoria 40%, ativos 2,05, reacoes 32,9, relogio 5,3%. [B] hp 7.9 / dur 96 / eps 0.6 / epr 0.5, 400 runs -> mediana 26,9 s (NO ALVO), relogio 4,4% (ok), ativos 2,24 (ok), vitoria 32% (baixa, e recuperavel em power_last/boss_power), reacoes 66,3 (FORA: o teto e 45). [C] = [B] + transform_consume_ua 2.0 -> 3.5, 400 runs -> reacoes 66,4. [D] = [B] + max_reaction_chain 3 -> 1 + aura_cap_ua 8.0 -> 4.0, 300 runs -> vitoria 36% (no alvo), mediana 27,8 s, relogio 5,2%, ativos 2,29, reacoes 66,5. A LICAO: a TAXA de reacao e invariante — 2,51/s em [A], 2,46 em [B], 2,41 em [C], 2,39 em [D]. Tres alavancas diferentes de tuning.json mexeram 0,2 reacao no total, porque nenhuma delas governa a taxa: quem governa e o intervalo de ataque das especies, o ua_per_hit e o tique de aura das arenas (species.json, items.json, enemies.json). Logo o teto de 45 reacoes equivale a um combate de 45/2,45 = 18,4 s, e o piso de 25 a 10,2 s: a faixa 25-45 DESCREVE um combate de 10 a 18 s, e a mediana de 28 s pede 69 reacoes. Os 13,1 s de hoje caem no meio da janela que o alvo de reacoes permite. Escolher a mediana de 28 s significa baixar a taxa de reacao em um terco, e isso e conteudo, nao escalar — ou entao afrouxar a faixa de reacoes do proprio 17.4. E decisao do autor, nao de calibragem, e por isso [A] ficou de pe.",
+    "timeout_rate_max": 0.06,
+    "winrate_experienced_min": 0.35,
+    "winrate_experienced_max": 0.45,
+    "actives_per_combat_min": 1.5,
+    "actives_per_combat_max": 2.5,
+    "reactions_per_combat_reaction_build": [
+      25,
+      45
+    ],
+    "reactions_per_combat_resonance_build": [
+      5,
+      12
+    ]
+  },
+  "momentos": {
+    "_doc": "Revisão 31/08 (autor): a Feira foi PARTIDA EM DUAS. 'loja' vende itens permanentes por Éter; 'cozinha' serve pratos pagos em ingredientes, e o jogador escolhe QUAL Prismon come. As duas mostram só 3 ofertas e têm um botão de renovar que custa Éter, com preço crescente dentro do mesmo momento.",
+    "_loja_duas_vezes": "Revisão 04/09 (autor: 'faz a loja aparecer mais de uma vez no ciclo'). Com uma loja só, e no passo 8, apenas 38% das runs chegavam a comprar alguma coisa — medido. Os 8 passos são um orçamento FECHADO, e o resto já está preso: 3 recrutas (tirar um derrubou a vitória de 40% para 11%), 2 poderes (1 inicial + 2 = o teto de 3 slots, cobrado no smoke test) e 1 cozinha (sem ela o sistema de pratos morre). 3+2+1+2 = 8 exatamente, então a TROCA foi o que saiu — não por preferência, por aritmética. A ORDEM também foi medida, em 240 runs por arranjo: com a loja no passo 4 a vitória fica em 38% e 85% das runs ainda cozinham; passá-la para o 5 cai para 36%, e para o 3 cai para 31%. O Mercador de Trocas continua inteiro no código e nos testes, a uma linha daqui de voltar.",
+    "evento_apos_combate": [
+      "recruta",
+      "poder",
+      "recruta",
+      "loja",
+      "cozinha",
+      "acaso",
+      "recruta",
+      "loja"
+    ],
+    "recruta": {
+      "_doc": "Duas criaturas oferecidas; leva-se a criatura INTEIRA.",
+      "opcoes": 2
+    },
+    "loja": {
+      "_doc": "Itens permanentes, pagos em Eter. Itens de assinatura ('for' no item) aparecem mesmo sem o dono na equipe — e ai nao da para comprar. Revisao 02/09: o Descanso e os consumiveis sairam; as criaturas se recuperam sozinhas ao fim de cada batalha, entao cura fora de combate nao tem funcao.",
+      "ofertas": 4,
+      "preco_por_raridade": {
+        "Comum": 15,
+        "Raro": 32
+      },
+      "reliquia_chance": 0.55,
+      "reliquia_preco": 34,
+      "renovar_preco": 6,
+      "renovar_passo": 4,
+      "_economia_doc": "O ETER VIRA MOEDA (15/09). Medido antes, 1000 runs: entravam 258 Eter por run e sobravam 119 na bolsa ao fim — 45% de tudo que entrou. Em 4.212 itens oferecidos, 538 reliquias e 2.622 pratos, o numero de compras recusadas por falta de Eter foi ZERO, nas tres categorias. O gargalo nao era preco, era OFERTA: nao havia o que comprar. Por isso a correcao mexe nos dois lados ao mesmo tempo — corta a renda E abre o ralo. | TABELA (1000 runs cada, so a economia mudando; power_last e boss_power recalibrados depois, ver difficulty._power_last_doc): [A] ether 20-32, 3 ofertas, Comum 11 / Raro 24, reliquia 35% a 38 -> entrada 258, saida 138, sobra mediana 119, recusas 0 / 0 / 0. [B] ether 13-22, 4 ofertas, Comum 15 / Raro 32, reliquia 55% a 34 -> entrada 196, saida 165, sobra mediana 30, recusas 406 itens / 631 reliquias / 43 pratos. Os tres alvos do pedido batem em [B]: vitoria 40,2% (faixa 35-45%), recusas claramente acima de zero, sobra mediana 30 (< 40). A reliquia continua sendo a peca mais forte do jogo e agora e uma ESCOLHA: 34 de Eter e mais de uma visita inteira de loja, e 75% das vezes que ela aparece o jogador nao pode leva-la junto dos itens. AS 4 OFERTAS FORAM MEDIDAS SEPARADAMENTE, porque o smoke test cobra 3: com [B] inteiro e ofertas=3 (400 runs), a sobra MEDIA volta de 31 para 41 e as recusas de item caem de 6,8% das ofertas (406 em 6.013) para 1,3% (24 em 1.808) — a cozinha cai de 43 recusas para 7. Apertar so o preco com 3 bancas faz sobrar Eter por falta de ONDE gastar, que e o defeito original com o sinal trocado. O ralo precisa de tamanho, nao so de profundidade."
+    },
+    "acaso": {
+      "_doc": "Eventos de risco: o jogador escolhe entrar ou seguir em frente. Voltou a sequencia em 15/09 (ver momentos._acaso_voltou). bonus_eter_min/max foram apagados junto: cada desfecho de data/random_events.json ja traz o proprio op 'ether' com o valor, e ninguem lia a faixa daqui."
+    },
+    "cozinha": {
+      "_doc": "Pratos pagos em ETER, como a Feira (revisao 03/09, autor: 'junta tudo pra ser comprado via eter'). O jogador escolhe o prato E o Prismon que come — a comida alimenta um so, e o Estomago dele e o limite.",
+      "ofertas": 3,
+      "renovar_preco": 4,
+      "renovar_passo": 3
+    },
+    "poder": {
+      "_doc": "Escolhe UM poder novo para a Mao do Domador, ate o teto de run.max_actives. Nao custa Eter: e progressao, nao compra.",
+      "ofertas": 3,
+      "escolhas": 2,
+      "_escolhas_doc": "DUAS escolhas seguidas no mesmo momento (15/09). Com o Acaso ocupando o passo 6, sobrou um momento de Poder so, e 1 inicial + 1 nunca chegaria aos 3 slots. A tela monta a oferta, o jogador aprende, e a segunda oferta ja vem sem o que ele acabou de levar (EventGen.power_offer(index, roll) muda a semente e filtra o que ele tem)."
+    },
+    "troca": {
+      "_doc": "O Mercador de Trocas: entrega um Prismon, leva outro. Prismon sem nada equipado vale um sem nada; com item ou prato, a oferta vem com a MESMA quantidade — 'os equivalentes, para que faca valer' (autor, 03/09).",
+      "renovar_preco": 8,
+      "renovar_passo": 5
+    },
+    "_ordem": "A ORDEM importa tanto quanto o conteudo (03/09). Cada momento so e visto por quem VENCE o combate daquele passo, entao o passo 8 vale ~39% das runs e o passo 4 vale ~95%. O Mercador estava no 8 e o autor nunca o via. Trocou de lugar com a Feira: reformar a equipe e decisao de MEIO de run, e comprar antes do chefe e o uso classico do ultimo passo.",
+    "_acaso_voltou": "O ACASO VOLTA A SEQUENCIA (15/09, decisao do autor). Os 7 eventos de data/random_events.json, a tela ScreenChance e este proprio bloco momentos.acaso eram INALCANCAVEIS: 'acaso' nao aparecia em evento_apos_combate, entao nenhuma run via um. Ele toma o lugar do SEGUNDO momento de Poder (passo 6), e o de Poder que ficou passa a dar DUAS escolhas (momentos.poder.escolhas) para run.max_actives = 3 continuar alcancavel. Os pisos que o smoke test cobra continuam de pe: 3 recrutas (1, 3, 7) e 2 lojas (4, 8)."
+  }
+}

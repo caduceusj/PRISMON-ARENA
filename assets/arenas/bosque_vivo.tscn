@@ -1,0 +1,126 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/cenario_fade.gdshader" id="sh"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/01_ceu.png" id="t1"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/04_montanha_funda.png" id="t2"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/06_montanha_perto.png" id="t3"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/07_arvores.png" id="t4"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/08_pedras.png" id="t5"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_1.png" id="t6"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_2.png" id="t7"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_3.png" id="t8"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_4.png" id="t9"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_5.png" id="t10"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_6.png" id="t11"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_7.png" id="t12"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_8.png" id="t13"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_9.png" id="t14"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_10.png" id="t15"]
+[ext_resource type="Texture2D" path="res://assets/arenas/pecas/bosque_vivo/10_cogumelo_11.png" id="t16"]
+
+[sub_resource type="ShaderMaterial" id="mat"]
+shader = ExtResource("sh")
+shader_parameter/origem = Vector2(0, 0)
+shader_parameter/tamanho = Vector2(1280, 260)
+shader_parameter/topo_fim = 0.3692
+shader_parameter/horizonte = 0.6538
+shader_parameter/rodape_fim = 0.9077
+shader_parameter/lateral = 0.1641
+
+[node name="Cenario" type="Node2D"]
+
+[node name="01 ceu" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 130)
+texture = ExtResource("t1")
+
+[node name="04 montanha funda" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 136)
+texture = ExtResource("t2")
+
+[node name="06 montanha perto" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 179)
+texture = ExtResource("t3")
+
+[node name="07 arvores" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(622, 186)
+texture = ExtResource("t4")
+
+[node name="08 pedras" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(640, 250)
+texture = ExtResource("t5")
+
+[node name="10 cogumelo 1" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(74, 177)
+texture = ExtResource("t6")
+
+[node name="10 cogumelo 2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(192, 177)
+texture = ExtResource("t7")
+
+[node name="10 cogumelo 3" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(310, 177)
+texture = ExtResource("t8")
+
+[node name="10 cogumelo 4" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(428, 177)
+texture = ExtResource("t9")
+
+[node name="10 cogumelo 5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(546, 177)
+texture = ExtResource("t10")
+
+[node name="10 cogumelo 6" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(664, 177)
+texture = ExtResource("t11")
+
+[node name="10 cogumelo 7" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(782, 177)
+texture = ExtResource("t12")
+
+[node name="10 cogumelo 8" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(900, 177)
+texture = ExtResource("t13")
+
+[node name="10 cogumelo 9" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1018, 177)
+texture = ExtResource("t14")
+
+[node name="10 cogumelo 10" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1136, 177)
+texture = ExtResource("t15")
+
+[node name="10 cogumelo 11" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("mat")
+position = Vector2(1254, 177)
+texture = ExtResource("t16")

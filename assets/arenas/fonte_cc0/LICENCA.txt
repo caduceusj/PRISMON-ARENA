@@ -1,0 +1,18 @@
+Parallax Background Forest Pixel Art
+Autor: MatiasVME
+Origem: https://opengameart.org/content/parallax-background-forest-pixel-art
+Licenca: CC0 (dominio publico) — uso livre, SEM exigencia de atribuicao.
+
+Camadas de 1280x360: sky, sun, clouds, mountains_1/2/3, rocks, trees,
+mais o arquivo .aseprite de origem.
+
+COMO ESTE PACOTE E USADO AQUI. Ele NAO entra no jogo do jeito que veio: a arte
+original e clara e alegre, e o PRISMON e escuro. `tools/retonar_arenas.py` mede
+a LUMINANCIA de cada pixel e remapeia para a rampa de cor de cada arena — o
+desenho do artista (silhueta, sombreado, dithering) fica inteiro, so a paleta
+muda. Depois `tools/desenhar_arenas.py` acrescenta, no Aseprite, o que da
+identidade a cada arena: veio de lava, poste, lapide.
+
+Os arquivos ficam aqui para a receita ser REPRODUZIVEL. Estao fora da build
+(ver exclude_filter em export_presets.cfg): o que o jogo carrega sao os PNGs
+finais em assets/arenas/.

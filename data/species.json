@@ -1,0 +1,180 @@
+{
+  "_doc": "ELENCO DE TESTE — 5 criaturas com sprites animados (mons-anims.zip), decisão do autor: 'vamos usar só esses por enquanto pra teste'. Os blocos de estatística vêm das espécies equivalentes do GDD §18. SEM linhas evolutivas: recruta-se a criatura inteira ('acho melhor pegar o pokemon inteiro' — Arthur).",
+  "_stats": "hp / atk / def / vel / pe / vontade — blocos do GDD §18.",
+  "roles": {
+    "Lamina": {
+      "name": "Lâmina",
+      "text": "Bate perto e bate rápido."
+    },
+    "Guardiao": {
+      "name": "Guardião",
+      "text": "Segura a linha de frente."
+    },
+    "Arcano": {
+      "name": "Arcano",
+      "text": "Golpeia de longe, com elemento."
+    },
+    "Curandeiro": {
+      "name": "Curandeiro",
+      "text": "Recupera vida dos aliados."
+    }
+  },
+  "species": [
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "element": "GELO",
+      "role": "Guardiao",
+      "stance": "Vanguarda",
+      "rarity": "Comum",
+      "hp": 780,
+      "atk": 24,
+      "def": 48,
+      "vel": 0.8,
+      "pe": 25,
+      "vontade": 70,
+      "ua_per_hit": 2.0,
+      "size": 64,
+      "ult": {
+        "name": "Muralha de Lã",
+        "text": "Escudo de 90 a si e ao aliado mais ferido.",
+        "ops": [
+          {
+            "op": "shield",
+            "target": "self",
+            "base": 90.0
+          },
+          {
+            "op": "shield",
+            "target": "ally_most_hurt",
+            "base": 90.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "hipocampo",
+      "name": "Hipocampo",
+      "element": "AGUA",
+      "role": "Arcano",
+      "stance": "Meio",
+      "rarity": "Comum",
+      "hp": 420,
+      "atk": 31,
+      "def": 18,
+      "vel": 1.6,
+      "pe": 78,
+      "vontade": 45,
+      "ua_per_hit": 3.0,
+      "size": 46,
+      "ult": {
+        "name": "Jato Contínuo",
+        "text": "5 UA de Encharcado em alvo único.",
+        "ops": [
+          {
+            "op": "strike",
+            "target": "current_target",
+            "element": "AGUA",
+            "ua": 5.0,
+            "elem_mult": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "pinto_raio",
+      "name": "Pinto-Raio",
+      "element": "RAIO",
+      "role": "Arcano",
+      "stance": "Meio",
+      "rarity": "Comum",
+      "hp": 380,
+      "atk": 34,
+      "def": 14,
+      "vel": 1.7,
+      "pe": 88,
+      "vontade": 35,
+      "ua_per_hit": 2.0,
+      "size": 44,
+      "ult": {
+        "name": "Arco Voltaico",
+        "text": "Encadeia entre 3 inimigos aplicando 2 UA de Carga.",
+        "ops": [
+          {
+            "op": "strike",
+            "target": "enemy_random_distinct",
+            "count": 3,
+            "element": "RAIO",
+            "ua": 2.0,
+            "elem_mult": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "apollo",
+      "name": "Apollo",
+      "element": "FOGO",
+      "role": "Lamina",
+      "stance": "Retaguarda",
+      "rarity": "Comum",
+      "hp": 350,
+      "atk": 66,
+      "def": 10,
+      "vel": 1.9,
+      "pe": 15,
+      "vontade": 30,
+      "ua_per_hit": 2.0,
+      "size": 58,
+      "ult": {
+        "name": "Cauda Solar",
+        "text": "Golpe ×1.2 que aplica Ferida por 3 s (cura recebida = 0).",
+        "ops": [
+          {
+            "op": "strike",
+            "target": "current_target",
+            "element": "FOGO",
+            "ua": 2.0,
+            "mult": 1.2
+          },
+          {
+            "op": "debuff",
+            "target": "current_target",
+            "stat": "healing",
+            "mult": 0.0,
+            "duration": 3.0,
+            "label": "Ferida"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coalla",
+      "name": "Coalla",
+      "element": "NATUREZA",
+      "role": "Curandeiro",
+      "stance": "Suporte",
+      "rarity": "Comum",
+      "hp": 460,
+      "atk": 26,
+      "def": 22,
+      "vel": 1.1,
+      "pe": 88,
+      "vontade": 55,
+      "ua_per_hit": 2.0,
+      "size": 54,
+      "ult": {
+        "name": "Sesta Revigorante",
+        "text": "Cura 15% do HP máx ao aliado mais ferido.",
+        "ops": [
+          {
+            "op": "heal",
+            "target": "ally_most_hurt",
+            "pct_max": 0.15
+          }
+        ]
+      }
+    }
+  ],
+  "_coalla": "COALLA (15/09). Unico desvio do bloco do GDD 18 neste arquivo, e ele e medido. A/B balanceado de 1000 runs (o bot distribui as 10 duplas por seed % 10, entao cada especie recebe exatamente 400 runs): coalla 27,25% contra sheep 42,0%, z = 4,4 — 15 pontos de desvantagem numa escolha feita na SEGUNDA tela do jogo, sem informacao nenhuma. A primeira hipotese (o Coro de Natureza morto) foi consertada antes de tocar em stat, e nao bastou: o Coro exige Peso Elemental 4 e uma Coalla sozinha vale 1. O que sobra e estrutural: a passiva Esporo dobra a cada 3 s ate 5x e a mediana de combate e 12,5 s, entao ela quase nunca passa do segundo degrau; e a cura de Suporte escala com ATK (o menor do elenco, 20) contra HP multiplicado por hp_scale. PE 70->88 e ATK 20->26 atacam os dois de uma vez: PE entra na cura, no escudo E na curva de dano de reacao do GDD 6.1, que e o eixo principal do jogo."
+}

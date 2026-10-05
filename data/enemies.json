@@ -1,0 +1,278 @@
+{
+  "_doc": "PRISMA GDD §16 — Selvagens do elenco de teste. O danger é LETALIDADE MEDIDA contra a dupla inicial (autoplay), não tema: bandos só de Lâminas (Ninhada Ígnea) são a pior coisa do early e valem 3★; times com Curandeiro diluem dano e valem menos.",
+  "themes": [
+    {
+      "id": "ninhada_ignea",
+      "name": "Ninhada Ígnea",
+      "elements": [
+        "FOGO"
+      ],
+      "arena": "Solo Vulcânico",
+      "danger": 3
+    },
+    {
+      "id": "cardume_profundo",
+      "name": "Cardume Profundo",
+      "elements": [
+        "AGUA"
+      ],
+      "arena": "Chuva Constante",
+      "danger": 1
+    },
+    {
+      "id": "enxame_estatico",
+      "name": "Enxame Estático",
+      "elements": [
+        "RAIO"
+      ],
+      "arena": "Campo Magnético",
+      "danger": 3
+    },
+    {
+      "id": "bruma_fervente",
+      "name": "Bruma Fervente",
+      "elements": [
+        "FOGO",
+        "AGUA"
+      ],
+      "arena": "Chuva Constante",
+      "danger": 3
+    },
+    {
+      "id": "bosque_umido",
+      "name": "Bosque Úmido",
+      "elements": [
+        "AGUA",
+        "NATUREZA"
+      ],
+      "arena": "Bosque Vivo",
+      "danger": 2
+    },
+    {
+      "id": "faisca_no_mato",
+      "name": "Faísca no Mato",
+      "elements": [
+        "RAIO",
+        "NATUREZA"
+      ],
+      "arena": "Bosque Vivo",
+      "danger": 2
+    },
+    {
+      "id": "tempestade_gelida",
+      "name": "Tempestade Gélida",
+      "elements": [
+        "GELO",
+        "RAIO"
+      ],
+      "arena": "Nevasca",
+      "danger": 4
+    },
+    {
+      "id": "geada_viva",
+      "name": "Geada Viva",
+      "elements": [
+        "GELO",
+        "NATUREZA"
+      ],
+      "arena": "Nevasca",
+      "danger": 4
+    },
+    {
+      "id": "vapor_eletrico",
+      "name": "Vapor Elétrico",
+      "elements": [
+        "AGUA",
+        "RAIO"
+      ],
+      "arena": "Campo Magnético",
+      "danger": 4
+    },
+    {
+      "id": "cinzas_congeladas",
+      "name": "Cinzas Congeladas",
+      "elements": [
+        "FOGO",
+        "GELO"
+      ],
+      "arena": "Solo Vulcânico",
+      "danger": 5
+    }
+  ],
+  "_arenas_doc": "As arenas passaram a TER EFEITO (autor, 03/09). Antes o campo 'text' descrevia coisas que o simulador nunca fazia. As marcadas com 'late' sao as que MUDAM A REGRA da briga (fantasmas, estimulo acumulando) e so entram na reta final — antes disso a arena so banha o campo de aura, que ajuda a combar em vez de punir.",
+  "arenas": [
+    {
+      "id": "solo_vulcanico",
+      "name": "Solo Vulcânico",
+      "text": "A cada 4 s, todos ganham 2 UA de Combustão. Sem dano — é lenha para as reações.",
+      "effect": {
+        "op": "mare_elemental",
+        "element": "FOGO",
+        "ua": 2.0,
+        "every": 4.0
+      },
+      "tint": "#6b4a5e",
+      "late": false
+    },
+    {
+      "id": "chuva_constante",
+      "name": "Chuva Constante",
+      "text": "A cada 3 s, todos ganham 2 UA de Encharcado. Sem dano — é lenha para as reações.",
+      "effect": {
+        "op": "mare_elemental",
+        "element": "AGUA",
+        "ua": 2.0,
+        "every": 3.0
+      },
+      "tint": "#6a7080",
+      "late": false
+    },
+    {
+      "id": "nevasca",
+      "name": "Nevasca",
+      "text": "A cada 4 s, todos ganham 2 UA de Gélido. Sem dano — é lenha para as reações.",
+      "effect": {
+        "op": "mare_elemental",
+        "element": "GELO",
+        "ua": 2.0,
+        "every": 4.0
+      },
+      "tint": "#b0a6c0",
+      "late": false
+    },
+    {
+      "id": "campo_magnetico",
+      "name": "Campo Magnético",
+      "text": "A cada 10 s, todos atacam 12% mais rápido. Acumula.",
+      "effect": {
+        "op": "estimulo",
+        "every": 10.0,
+        "atk_speed": 0.12,
+        "max": 4
+      },
+      "tint": "#7a6bd0",
+      "late": false
+    },
+    {
+      "id": "bosque_vivo",
+      "name": "Bosque Vivo",
+      "text": "A cada 4 s, todos ganham 2 UA de Esporo. Sem dano — é lenha para as reações.",
+      "effect": {
+        "op": "mare_elemental",
+        "element": "NATUREZA",
+        "ua": 2.0,
+        "every": 4.0
+      },
+      "tint": "#a8804a",
+      "late": false
+    },
+    {
+      "id": "arena_assombrada",
+      "name": "Arena Assombrada",
+      "text": "Quem cai vira fantasma: continua aplicando aura, mas não causa dano.",
+      "effect": {
+        "op": "assombrada"
+      },
+      "tint": "#4a6b7a",
+      "late": true
+    },
+    {
+      "id": "camara_de_estimulos",
+      "name": "Câmara de Estímulos",
+      "text": "A cada 10 s, todos ficam 10% mais fortes. Acumula — quem demora, sofre.",
+      "effect": {
+        "op": "estimulo",
+        "every": 10.0,
+        "atk": 0.1,
+        "max": 5
+      },
+      "tint": "#c0c8d8",
+      "late": true
+    }
+  ],
+  "boss": {
+    "id": "devorador",
+    "name": "O Devorador",
+    "title": "CHEFE I — testa: economia",
+    "element": "NATUREZA",
+    "role": "Guardiao",
+    "stance": "Vanguarda",
+    "sprite": "coalla",
+    "size": 130,
+    "hp": 4500,
+    "atk": 46,
+    "def": 52,
+    "vel": 0.7,
+    "pe": 55,
+    "vontade": 70,
+    "ua_per_hit": 2.0,
+    "text": "Um Coalla imenso. Não tem resistências: qualquer build vence — mas quem cozinhou tudo e não guardou despensa vence na raça.",
+    "traits": [
+      {
+        "id": "fome_insaciavel",
+        "name": "Fome Insaciável",
+        "text": "A cada 8 s, come 12 de Eter da sua bolsa. Se ela zerar, ele ganha +50% de ATK.",
+        "interval": 8.0,
+        "atk_bonus_when_empty": 0.5,
+        "ether": 12
+      }
+    ],
+    "ult": {
+      "name": "Bocarra",
+      "text": "Dano pesado em área e 4 UA de Esporo.",
+      "ops": [
+        {
+          "op": "strike",
+          "target": "enemy_near_self",
+          "radius": 260.0,
+          "element": "NATUREZA",
+          "ua": 4.0,
+          "mult": 1.6
+        }
+      ]
+    },
+    "escort": {
+      "theme": "faisca_no_mato",
+      "count": 2,
+      "power": 1.2
+    }
+  },
+  "_modifiers_doc": "Modificadores do BANDO inimigo (autor, 03/09). Entram por no, escalando com o perigo: nenhum nos primeiros passos, um no meio, dois no fim. Aparecem na tela de escolha e na preparacao ANTES de o jogador entrar — um combate que muda de regra sem avisar e injusto, nao dificil.",
+  "modifiers": [
+    {
+      "id": "afinidade_instavel",
+      "name": "Afinidade Instável",
+      "text": "Trocam de elemento a cada 5 s.",
+      "icon": "elem_LUZ",
+      "color": "#a86fe0",
+      "effect": {
+        "op": "element_cycle",
+        "every": 5.0
+      }
+    },
+    {
+      "id": "couracados",
+      "name": "Couraçados",
+      "text": "10% mais resistentes.",
+      "icon": "g_shield",
+      "color": "#7fb8ff",
+      "effect": {
+        "op": "team_mod",
+        "stat": "dmg_taken",
+        "value": 0.9
+      }
+    },
+    {
+      "id": "ferozes",
+      "name": "Ferozes",
+      "text": "Causam 10% a mais de dano.",
+      "icon": "g_sword",
+      "color": "#e0576a",
+      "effect": {
+        "op": "team_mod",
+        "stat": "dmg_dealt",
+        "value": 1.1
+      }
+    }
+  ]
+}

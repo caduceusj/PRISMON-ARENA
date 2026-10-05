@@ -1,0 +1,57 @@
+{
+  "_doc": "A COR DO JOGO. `ativa` diz qual paleta vale; `paletas` traz a do jogo. Paletas extras moram em data/paletas/*.json e sao juntadas na carga — ver o _doc de qualquer arquivo de la. Para trocar a cara do jogo inteiro, mude uma palavra em `ativa`. Nenhuma cor de interface vive em .gd: o lint reprova Color(\"#...\") em src/ui/ui.gd e em src/ui/prisma_theme.gd.",
+  "ativa": "vidro",
+  "paletas": {
+    "vidro": {
+      "nome": "O Vidro do Domador",
+      "nota": "A paleta do jogo. Vidro fume roxo sobre a mesa de campo; a cor forte so no feixe e no corte. `sala_na_materia` 0.32 e o que faz cada tela ser um lugar: em 0.00 os dois cartoes da escolha de combate saem byte a byte iguais.",
+      "materia": {
+        "mesa": "#0f0d18",
+        "lajota": "#1c1930",
+        "lajota_hi": "#262138",
+        "aresta": "#3a3450"
+      },
+      "materia_aux": {
+        "recuo": "#070610",
+        "aresta_hi": "#4b4468"
+      },
+      "recipiente": {
+        "fundo": "#0f0d18",
+        "painel": "#191627",
+        "painel_hi": "#221e33",
+        "linha": "#2e2942"
+      },
+      "texto": {
+        "forte": "#e9e6f2",
+        "fraco": "#8f88a8"
+      },
+      "estado": {
+        "bom": "#5cd6a0",
+        "ruim": "#e0576a",
+        "aviso": "#e8b23a",
+        "ouro": "#f0d98a",
+        "acento": "#7d6cf0"
+      },
+      "salas": {
+        "titulo": "#6a5ad8",
+        "iniciais": "#4f8a63",
+        "escolha": "#3f5a8a",
+        "preparacao": "#7a6a9e",
+        "sinergias": "#7a6a9e",
+        "combate": "#7a6a9e",
+        "vitoria": "#3f8f6a",
+        "derrota": "#8f3f4e",
+        "recruta": "#4a90c8",
+        "loja": "#e8a23a",
+        "cozinha": "#e8663a",
+        "poder": "#3ad0e8",
+        "acaso": "#8f6ae0",
+        "troca": "#6f9a86",
+        "chefe": "#b0524a",
+        "fim_vitoria": "#c9a13f"
+      },
+      "sala_forca": 0.06,
+      "sala_na_materia": 0.32
+    }
+  }
+}

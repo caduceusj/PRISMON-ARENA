@@ -1,0 +1,325 @@
+{
+  "_doc": "PRISMA — Itens equipáveis. Revisão 31/08 (autor): três famílias novas. 'for' amarra o item a um Prismon específico — ele pode aparecer na loja sem que você tenha o dono, e aí não dá para comprar. 'unit_ult_gain' é regeneração de Poder (a carga que dispara a ultimate). 'rx_dmg_add' e 'rx_stun' são SINERGIA: escalam com uma reação específica, então valem muito numa build e nada em outra.",
+  "items": [
+    {
+      "id": "presa_rachada",
+      "name": "Presa Rachada",
+      "cat": "arma",
+      "rarity": "Comum",
+      "text": "+12 ATK",
+      "mods": {
+        "atk": 12.0
+      }
+    },
+    {
+      "id": "carapaca_fossil",
+      "name": "Carapaça Fóssil",
+      "cat": "arma",
+      "rarity": "Comum",
+      "text": "+150 HP, -0.2 VEL",
+      "mods": {
+        "hp": 150.0,
+        "vel": -0.2
+      }
+    },
+    {
+      "id": "garra_tremula",
+      "name": "Garra Trêmula",
+      "cat": "arma",
+      "rarity": "Comum",
+      "text": "+0.5 VEL, -8 ATK",
+      "mods": {
+        "vel": 0.5,
+        "atk": -8.0
+      }
+    },
+    {
+      "id": "cristal_foco",
+      "name": "Cristal de Foco",
+      "cat": "arma",
+      "rarity": "Comum",
+      "text": "+30 PE",
+      "mods": {
+        "pe": 30.0
+      }
+    },
+    {
+      "id": "amuleto_teimoso",
+      "name": "Amuleto Teimoso",
+      "cat": "arma",
+      "rarity": "Comum",
+      "text": "+40 Vontade",
+      "mods": {
+        "vontade": 40.0
+      }
+    },
+    {
+      "id": "nucleo_igneo",
+      "name": "Núcleo Ígneo",
+      "cat": "nucleo",
+      "rarity": "Comum",
+      "text": "Muda a Afinidade da unidade para Fogo.",
+      "mods": {
+        "set_element": "FOGO"
+      }
+    },
+    {
+      "id": "nucleo_gelido",
+      "name": "Núcleo Gélido",
+      "cat": "nucleo",
+      "rarity": "Comum",
+      "text": "Muda a Afinidade da unidade para Gelo.",
+      "mods": {
+        "set_element": "GELO"
+      }
+    },
+    {
+      "id": "nucleo_aquatico",
+      "name": "Núcleo Aquático",
+      "cat": "nucleo",
+      "rarity": "Comum",
+      "text": "Muda a Afinidade da unidade para Água.",
+      "mods": {
+        "set_element": "AGUA"
+      }
+    },
+    {
+      "id": "nucleo_eletrico",
+      "name": "Núcleo Elétrico",
+      "cat": "nucleo",
+      "rarity": "Comum",
+      "text": "Muda a Afinidade da unidade para Raio.",
+      "mods": {
+        "set_element": "RAIO"
+      }
+    },
+    {
+      "id": "totem_fole",
+      "name": "Totem do Fole",
+      "cat": "totem",
+      "rarity": "Raro",
+      "text": "Reações desta unidade causam +25% de dano.",
+      "mods": {
+        "unit_reaction_dmg_add": 0.25
+      }
+    },
+    {
+      "id": "totem_persistencia",
+      "name": "Totem da Persistência",
+      "cat": "totem",
+      "rarity": "Raro",
+      "text": "Auras aplicadas por esta unidade decaem 50% mais devagar.",
+      "mods": {
+        "unit_aura_decay_mult": 0.5
+      }
+    },
+    {
+      "id": "totem_excesso",
+      "name": "Totem do Excesso",
+      "cat": "totem",
+      "rarity": "Raro",
+      "text": "Teto de UA sobe de 8 para 12 nos alvos desta unidade.",
+      "mods": {
+        "unit_aura_cap": 12.0
+      }
+    },
+    {
+      "id": "totem_ricochete",
+      "name": "Totem do Ricochete",
+      "cat": "totem",
+      "rarity": "Raro",
+      "text": "20% de chance de a reação disparar duas vezes.",
+      "mods": {
+        "unit_double_reaction": 0.2
+      }
+    },
+    {
+      "id": "coleira_compartilhada",
+      "name": "Coleira Compartilhada",
+      "cat": "vinculo",
+      "rarity": "Raro",
+      "text": "15% do dano sofrido por esta unidade é redistribuído à equipe.",
+      "mods": {
+        "share_damage": 0.15
+      }
+    },
+    {
+      "id": "bateria_ossea",
+      "name": "Bateria Óssea",
+      "cat": "poder",
+      "rarity": "Comum",
+      "text": "+35% de regeneração de Poder. A ultimate sai mais vezes por combate.",
+      "mods": {
+        "unit_ult_gain": 1.35
+      }
+    },
+    {
+      "id": "coracao_turbina",
+      "name": "Coração-Turbina",
+      "cat": "poder",
+      "rarity": "Raro",
+      "text": "+70% de regeneração de Poder, mas −60 de HP máximo.",
+      "mods": {
+        "unit_ult_gain": 1.7,
+        "hp": -60.0
+      }
+    },
+    {
+      "id": "diapasao_vivo",
+      "name": "Diapasão Vivo",
+      "cat": "poder",
+      "rarity": "Raro",
+      "text": "+25% de regeneração de Poder para esta unidade e +10% para o resto da equipe.",
+      "mods": {
+        "unit_ult_gain": 1.25,
+        "team_ult_gain": 1.1
+      }
+    },
+    {
+      "id": "para_raios",
+      "name": "Para-Raios",
+      "cat": "sinergia",
+      "rarity": "Comum",
+      "text": "Suas Eletrocussões causam +45% de dano.",
+      "mods": {
+        "rx_dmg_add": {
+          "ELETROCUSSAO": 0.45
+        }
+      }
+    },
+    {
+      "id": "isolante_rachado",
+      "name": "Isolante Rachado",
+      "cat": "sinergia",
+      "rarity": "Raro",
+      "text": "Suas Eletrocussões atordoam o alvo por 1 s. Recarga de 6 s.",
+      "mods": {
+        "rx_stun": {
+          "ELETROCUSSAO": {
+            "duration": 1.0,
+            "cooldown": 6.0
+          }
+        }
+      }
+    },
+    {
+      "id": "lente_de_forja",
+      "name": "Lente de Forja",
+      "cat": "sinergia",
+      "rarity": "Comum",
+      "text": "Seus Derretimentos causam +40% de dano.",
+      "mods": {
+        "rx_dmg_add": {
+          "DERRETIMENTO": 0.4
+        }
+      }
+    },
+    {
+      "id": "chave_de_vapor",
+      "name": "Chave de Vapor",
+      "cat": "sinergia",
+      "rarity": "Comum",
+      "text": "Suas Vaporizações causam +40% de dano.",
+      "mods": {
+        "rx_dmg_add": {
+          "VAPORIZAR": 0.4
+        }
+      }
+    },
+    {
+      "id": "estopim_curto",
+      "name": "Estopim Curto",
+      "cat": "sinergia",
+      "rarity": "Raro",
+      "text": "Suas Detonações causam +55% de dano e atordoam por 0,8 s. Recarga de 8 s.",
+      "mods": {
+        "rx_dmg_add": {
+          "DETONACAO": 0.55
+        },
+        "rx_stun": {
+          "DETONACAO": {
+            "duration": 0.8,
+            "cooldown": 8.0
+          }
+        }
+      }
+    },
+    {
+      "id": "esporo_dormente",
+      "name": "Esporo Dormente",
+      "cat": "sinergia",
+      "rarity": "Comum",
+      "text": "Suas Catalisações causam +50% de dano.",
+      "mods": {
+        "rx_dmg_add": {
+          "CATALISACAO": 0.5
+        }
+      }
+    },
+    {
+      "id": "cauda_de_brasa",
+      "name": "Cauda de Brasa",
+      "cat": "assinatura",
+      "rarity": "Raro",
+      "for": "apollo",
+      "text": "+20 ATK e Derretimentos dele causam +35%.",
+      "mods": {
+        "atk": 20.0,
+        "rx_dmg_add": {
+          "DERRETIMENTO": 0.35
+        }
+      }
+    },
+    {
+      "id": "la_condutora",
+      "name": "Lã Condutora",
+      "cat": "assinatura",
+      "rarity": "Raro",
+      "for": "sheep",
+      "text": "+220 HP e +30% de regeneração de Poder.",
+      "mods": {
+        "hp": 220.0,
+        "unit_ult_gain": 1.3
+      }
+    },
+    {
+      "id": "bico_pararaio",
+      "name": "Bico Para-Raio",
+      "cat": "assinatura",
+      "rarity": "Raro",
+      "for": "pinto_raio",
+      "text": "Aplica +2 UA e Eletrocussões dele causam +40%.",
+      "mods": {
+        "unit_ua_add": 2.0,
+        "rx_dmg_add": {
+          "ELETROCUSSAO": 0.4
+        }
+      }
+    },
+    {
+      "id": "sifao_das_mares",
+      "name": "Sifão das Marés",
+      "cat": "assinatura",
+      "rarity": "Raro",
+      "for": "hipocampo",
+      "text": "Auras dele decaem 60% mais devagar.",
+      "mods": {
+        "unit_aura_decay_mult": 0.4
+      }
+    },
+    {
+      "id": "folha_perene",
+      "name": "Folha Perene",
+      "cat": "assinatura",
+      "rarity": "Raro",
+      "for": "coalla",
+      "text": "Cura concedida +40% e +25% de regeneração de Poder.",
+      "mods": {
+        "healing_out": 1.4,
+        "unit_ult_gain": 1.25
+      }
+    }
+  ],
+  "_dono": "Item com 'for' mostra o RETRATO do dono na tela (ScreenShop._dono, ItemDock), nao a frase 'So o Apollo.' — por isso o texto descreve APENAS o efeito. Repetir o dono em imagem e em palavra fazia o cartao dizer a mesma coisa duas vezes na mesma linha.",
+  "_ligados": "QUATRO CHAVES DESTE ARQUIVO ESTAVAM MORTAS ou com o SINAL TROCADO ate 15/09, e as quatro estao ligadas agora: unit_ua_add (Bico Para-Raio) era somado em UnitInstance.item_mods e nunca chegava a SimUnit — o item de assinatura do Pinto-Raio valia metade do texto; unit_aura_cap (Totem do Excesso) era escrito em CombatBuilder e sobrescrito por CombatSim.begin no tique seguinte, e agora vale sobre os ALVOS de quem carrega, como o texto sempre disse; unit_aura_decay_mult (Totem da Persistencia, Sifao das Mares) estava INVERTIDO — era aplicado nas auras que o portador RECEBE, ou seja, os dois itens faziam as auras do INIMIGO durarem mais em quem os equipava; team_ult_gain (Diapasao Vivo) ninguem lia, porque Run.mods() so junta ressonancia e reliquia — a agregacao de item passou a acontecer em CombatBuilder.build. Licao: um item so esta vivo quando um teste monta dois combates iguais, um com ele e um sem, e compara um numero."
+}
